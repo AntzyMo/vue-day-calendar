@@ -1,0 +1,38 @@
+{
+  "name": "vue-day-calendar",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite build -w",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "unocss": "^0.58.6",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.28",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vue-tsc": "^2.0.6"
+  }
+}

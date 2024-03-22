@@ -1,0 +1,18 @@
+{
+  "name": "vue-day-calendar",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@antzy/eslint-config": "^3.2.6",
+    "eslint": "^8.57.0"
+  }
+}
