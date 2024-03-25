@@ -1,5 +1,6 @@
 import path from 'node:path'
 import UnoCSS from 'unocss/vite'
+import dts from 'vite-plugin-dts'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
@@ -9,6 +10,9 @@ export default defineConfig({
     vue(),
     UnoCSS({
       mode: 'vue-scoped'
+    }),
+    dts({
+      include: 'src'
     })
   ],
   build: {

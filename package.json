@@ -6,7 +6,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm --filter ./packages/vueDayCalendar dev",
+    "build": "pnpm --filter ./packages/vueDayCalendar build",
+    "dev:docs":"pnpm --filter ./docs dev"
   },
   "keywords": [],
   "author": "",

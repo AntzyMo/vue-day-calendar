@@ -11,11 +11,14 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: [],
   presets: [
     presetUno(),
     presetAttributify(),
-    presetIcons(),
+    presetIcons({
+      collections: {
+        mingcute: () => import('@iconify-json/mingcute/icons.json').then(i => i.default)
+      }
+    }),
     presetTypography(),
     presetWebFonts()
   ],
