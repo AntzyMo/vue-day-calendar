@@ -1,10 +1,15 @@
 import dayjs from 'dayjs'
 
-export function transDayjs(date: string | Date) {
+type DateOption = string | Date | undefined
+
+export function transDayjs(date: DateOption) {
   return dayjs(date)
 }
 
-export function isSameDate(nextDate: string | Date | undefined, prevDate?: string | Date) {
-  const date = prevDate || new Date()
-  return dayjs(date).isSame(nextDate, 'day')
+export function isSameDate(target: DateOption, source: DateOption) {
+  return dayjs(target).isSame(source, 'day')
+}
+
+export function isToday(date: string | Date | undefined) {
+  return dayjs().isSame(date, 'day')
 }

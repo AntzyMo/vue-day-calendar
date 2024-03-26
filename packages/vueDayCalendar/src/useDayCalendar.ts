@@ -1,11 +1,13 @@
 import dayjs from 'dayjs'
-import { computed, shallowRef } from 'vue'
+import { computed, shallowRef, toValue } from 'vue'
 import type { DayType } from './types'
 
 interface useDayCalendarOptons {
   format: string
   defaultDate: string | Date
 }
+
+export type MonthsTrigger = (type: 'prev' | 'next') => void
 
 export default function useDayCalendar({ format }: useDayCalendarOptons) {
   const dayjsRef = shallowRef(dayjs())
@@ -26,8 +28,7 @@ export default function useDayCalendar({ format }: useDayCalendarOptons) {
       datesArr.push({
         date: dateRaw.format('YYYY-MM-DD'),
         value: dateRaw.format('D'),
-        type: 'prev',
-        selected: false
+        type: 'prev'
       })
     }
 
@@ -35,8 +36,7 @@ export default function useDayCalendar({ format }: useDayCalendarOptons) {
       datesArr.push({
         date: dayjsRef.value.date(day).format('YYYY-MM-DD'),
         value: String(day),
-        type: 'current',
-        selected: false
+        type: 'current'
       })
     }
 
@@ -48,8 +48,7 @@ export default function useDayCalendar({ format }: useDayCalendarOptons) {
       datesArr.push({
         date: dateRaw.format('YYYY-MM-DD'),
         value: dateRaw.format('D'),
-        type: 'next',
-        selected: false
+        type: 'next'
       })
     }
 
@@ -61,19 +60,16 @@ export default function useDayCalendar({ format }: useDayCalendarOptons) {
     return arr
   })
 
-  function prevMonthTrigger() {
-    dayjsRef.value = dayjsRef.value.subtract(1, 'month')
+  const monthsTrigger = (type: 'prev' | 'next') => {
+    const dayjs = toValue(dayjsRef)
+    dayjsRef.value = type === 'prev' ? dayjs.subtract(1, 'month') : dayjs.add(1, 'month')
   }
 
-  function nextMonthTrigger() {
-    dayjsRef.value = dayjsRef.value.add(1, 'month')
-  }
   return {
     dayjsRef,
     year,
     weekday,
-    prevMonthTrigger,
-    nextMonthTrigger,
+    monthsTrigger,
     dates
   }
 }

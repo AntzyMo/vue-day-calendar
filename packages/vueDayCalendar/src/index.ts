@@ -1,4 +1,4 @@
-import vueDayCalendar from './vueDayCalendar.vue'
+import VueDayCalendar from './vueDayCalendar.vue'
 
-export { vueDayCalendar }
+export { VueDayCalendar }
 export * from './types'

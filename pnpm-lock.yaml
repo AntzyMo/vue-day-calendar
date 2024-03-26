@@ -17,6 +17,9 @@ importers:
 
   docs:
     dependencies:
+      '@iconify-json/mingcute':
+        specifier: ^1.1.17
+        version: 1.1.17
       unocss:
         specifier: ^0.58.6
         version: 0.58.6(postcss@8.4.38)(vite@5.2.2)
