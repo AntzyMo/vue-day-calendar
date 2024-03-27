@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "pnpm --filter ./packages/vueDayCalendar dev",
     "build": "pnpm --filter ./packages/vueDayCalendar build",
-    "dev:docs":"pnpm --filter ./docs dev"
+    "dev:docs": "pnpm --filter ./docs dev"
   },
   "keywords": [],
   "author": "",

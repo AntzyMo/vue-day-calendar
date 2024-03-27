@@ -11,11 +11,8 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: [
-    {
-      itemHoverBackground: 'hsl(0deg 0% 0% / 5%)'
-
-    }
+  rules:[
+    ['hoverItemBackground',{background:'hsl(0deg 0% 0% / 5%)'}]
   ],
   presets: [
     presetUno(),

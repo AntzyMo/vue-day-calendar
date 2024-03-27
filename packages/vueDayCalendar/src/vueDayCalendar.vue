@@ -4,7 +4,9 @@
   import type { MonthsTrigger } from './useDayCalendar'
   import type { DayType, OnSelectValue, VueDayCalendarProps } from './types'
 
-  import IconButton from './IconButton.vue'
+  import IconLeftArrow from '~icons/mingcute/left-fill'
+  import IconRightArrow from '~icons/mingcute/right-fill'
+
   import useDayCalendar from './useDayCalendar'
   import { isSameDate, isToday } from './helper'
 
@@ -22,14 +24,19 @@
   const modelSelect = defineModel<string | Date>('selected')
 
   // classes computed
+  const rootClass = computed(() => props.classes?.root)
+  const headClass = computed(() => props.classes?.head)
+  const head_dateClass = computed(() => props.classes?.head_date)
+  const head_actionClass = computed(() => props.classes?.head_action)
   const weekClass = computed(() => props.classes?.week)
+  const week_dayClass = computed(() => props.classes?.week_day)
   const bodyClass = computed(() => props.classes?.body)
   const body_rowClass = computed(() => props.classes?.body_row)
   const body_colClass = computed(() => props.classes?.body_col)
   const dayClass = computed(() => props.classes?.day)
   const day_selectedClass = computed(() => props.classes?.day_selected)
-  const day_outsideClass = computed(() => props.classes?.day_outside || 'opacity-50')
-  const todayClass = computed(() => props.classes?.today || 'font-bold')
+  const day_outsideClass = computed(() => props.classes?.day_outside || 'day_outside')
+  const todayClass = computed(() => props.classes?.today || 'today')
 
   const {
     year,
@@ -42,7 +49,7 @@
   })
 
   defineSlots<{
-    head: (props: { date: string;tigger: MonthsTrigger }) => any
+    head: (props: { date: string; tigger: MonthsTrigger }) => any
     week: (props: { weekday: string[] }) => any
     body: (props: { dates: DayType[][] }) => any
     footer: () => any
@@ -63,32 +70,28 @@
 </script>
 
 <template>
-  <div class="cursor-default select-none w-full">
+  <div class="v-day-calendar" :class="rootClass">
     <slot name="head" :date="year" :tigger="monthsTrigger">
-      <div class="flex items-center justify-between mb-2">
-        <div class="font-medium text-[10px]">
+      <div class="head" :class="headClass">
+        <div class="head_date" :class="head_dateClass">
           {{ year }}
         </div>
-        <div class="flex gap-[2px] items-center">
-          <IconButton @click="monthsTrigger('prev')">
-            <div class="i-mingcute-left-fill  text-sm"/>
-          </IconButton>
-
-          <IconButton @click="monthsTrigger('next')">
-            <div class="i-mingcute-right-fill  text-sm"/>
-          </IconButton>
+        <div class="action_block">
+          <IconLeftArrow class="action_button" :class="head_actionClass" @click="monthsTrigger('prev')"/>
+          <IconRightArrow class="action_button" :class="head_actionClass" @click="monthsTrigger('next')"/>
         </div>
       </div>
     </slot>
 
-    <table class="w-full">
+    <table class="table_layout">
       <slot name="week" :weekday>
         <thead>
-          <tr class="flex gap-1 mb-2" :class="weekClass">
+          <tr class="week" :class="weekClass">
             <th
               v-for="item in weekday"
               :key="item"
-              class="flex-1 font-normal text-[10px] text-center"
+              class="week_day"
+              :class="week_dayClass"
             >
               {{ item }}
             </th>
@@ -100,18 +103,18 @@
           <tr
             v-for="(item, index) in dates"
             :key="index"
-            class="flex"
+            class="body_row"
             :class="body_rowClass"
           >
             <td
               v-for="it in item"
               :key="it.value"
-              class="cursor-pointer flex flex-1 items-center justify-center"
+              class="body_col"
               :class="body_colClass"
             >
               <div
                 :aria-selected="isSameDate(modelSelect, it.date) || undefined"
-                class="text-base"
+                class="day"
                 :class="[
                   dayClass,
                   it.type !== 'current' ? day_outsideClass : '',
@@ -132,3 +135,85 @@
     </table>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.v-day-calendar {
+  cursor: default;
+  user-select: none;
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    .action_block {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+
+      .action_button{
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 6px;
+        color: #a3a3a3;
+
+        &:hover{
+          background: #e5e5e5;
+        }
+      }
+
+    }
+  }
+
+  .table_layout {
+    width: 100%;
+
+    .week {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+
+      .week_day {
+        font-size: 12px;
+        text-align: center;
+        flex:1;
+      }
+    }
+
+    .body_row{
+      display: flex;
+    }
+    .body_col{
+      cursor: pointer;
+      display: flex;
+      flex:1;
+      align-items: center;
+      justify-content: center;
+
+      .day{
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        border-radius: 5px;
+        font-size: 12px;
+        text-align: center;
+
+        &:hover{
+          background:hsl(0deg 0% 0% / 5%) ;
+        }
+      }
+
+      .day_outside{
+        opacity: 50%;
+      }
+
+      .today{
+        color: #fff;
+        background: #38bdf8;
+      }
+
+    }
+  }
+}
+</style>

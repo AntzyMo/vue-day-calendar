@@ -4,7 +4,6 @@
 
   import Classes from './components/Classes/index.vue'
 
-  // 1. 样式
   // 2. 怎么去获取选中的状态 并添加选中后的样式
   // 3. 可以自定义日期 是否需要v-model
   // 4. 可以隐藏灰色的日期
@@ -18,18 +17,9 @@
       <Classes/>
     </div>
 
-    <div class="w-[300px]">
+    <div class="w-[250px]">
       <h2>base</h2>
       <VueDayCalendar/>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.vue-day-calendar{
-  :deep(.daySelect){
-    color:red;
-    background: yellow;
-  }
-}
-</style>

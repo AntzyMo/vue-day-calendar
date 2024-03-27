@@ -1,5 +1,10 @@
-interface classesTypes {
+export interface classesTypes {
+  root: string
+  head: string
+  head_date: string
+  head_action: string
   week: string
+  week_day: string
   body: string
   body_row: string
   body_col: string

@@ -3,8 +3,9 @@
   import { VueDayCalendar, type VueDayCalendarProps } from 'vue-day-calendar'
 
   const classes: VueDayCalendarProps['classes'] = {
-    today: '!text-white !bg-sky-400',
-    day: 'h-6 hover:itemHoverBackground leading-6 rounded-[5px] rounded-[5px] !text-[10px] text-center  w-6'
+
+    week_day:'!text-[10px]',
+    day: 'h-6 hover:hoverItemBackground  leading-6 rounded-[5px] rounded-[5px] !text-[10px] text-center  w-6'
   }
 </script>
 
