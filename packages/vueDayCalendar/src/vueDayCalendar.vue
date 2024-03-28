@@ -1,19 +1,17 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
-
-  import type { MonthsTrigger } from './useDayCalendar'
-  import type { DayType, OnSelectValue, VueDayCalendarProps } from './types'
+  import dayjs from 'dayjs'
+  import { computed, shallowRef, toValue } from 'vue'
+  import type { DayType, MonthsTrigger, OnSelectValue, VueDayCalendarProps } from './types'
 
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
 
-  import useDayCalendar from './useDayCalendar'
-  import { isSameDate, isToday } from './helper'
+  import { createDay, isSameDate, isToday } from './helper'
 
   const props = withDefaults(defineProps<VueDayCalendarProps>(), {
     locale: 'en',
-    size: 'small',
-    format: 'YYYY 年 M 月'
+    format: 'YYYY 年 M 月',
+    showOutsideDays: false
   })
 
   const emit = defineEmits<{
@@ -38,26 +36,75 @@
   const day_outsideClass = computed(() => props.classes?.day_outside || 'day_outside')
   const todayClass = computed(() => props.classes?.today || 'today')
 
-  const {
-    year,
-    weekday,
-    monthsTrigger,
-    dates
-  } = useDayCalendar({
-    format: props.format,
-    defaultDate: new Date()
-  })
-
   defineSlots<{
     head: (props: { date: string; tigger: MonthsTrigger }) => any
     week: (props: { weekday: string[] }) => any
-    body: (props: { dates: DayType[][] }) => any
+    body: (props: { days: DayType[][] }) => any
     footer: () => any
   }>()
 
   defineExpose({
     monthsTrigger
   })
+
+  const dayjsRef = shallowRef(dayjs())
+  const year = computed(() => dayjsRef.value.format(props.format))
+
+  const weekday: string[] = []
+  for (let i = 1; i <= 7; i++) {
+    weekday.push(dayjsRef.value.day(i).format('dd'))
+  }
+
+  const days = computed<DayType[][]>(() => {
+    const totalDay = dayjsRef.value.daysInMonth()
+    const startDay = dayjsRef.value.startOf('month').day()
+
+    const daysArr: DayType[] = []
+
+    for (let i = startDay - 1; i >= 1; i--) {
+      const dateRaw = dayjsRef.value.startOf('month').subtract(i, 'day')
+      daysArr.push(createDay(dateRaw, 'prev'))
+    }
+
+    for (let day = 1; day <= totalDay; day++) {
+      const dateRaw = dayjsRef.value.date(day)
+      daysArr.push(createDay(dateRaw, 'current'))
+    }
+
+    const nextOutsideDayNumber = 42 - daysArr.length
+
+    for (let i = 1; i <= nextOutsideDayNumber; i++) {
+      const dateRaw = dayjsRef.value.endOf('month').add(i, 'day')
+      daysArr.push(createDay(dateRaw, 'next'))
+    }
+
+    let sevenMapArr: DayType[][] = []
+    while (daysArr.length) {
+      sevenMapArr.push(daysArr.splice(0, 7))
+    }
+
+    if (!props.showOutsideDays) {
+      sevenMapArr = sevenMapArr.map(days => {
+        return days.map(day => {
+          if (day.type === 'current') {
+            return day
+          }
+          return {
+            ...day,
+            value: ''
+          }
+        })
+      })
+    }
+
+    console.log('sevenMapArr', sevenMapArr)
+    return sevenMapArr
+  })
+
+  function monthsTrigger(type: 'prev' | 'next') {
+    const dayjs = toValue(dayjsRef)
+    dayjsRef.value = type === 'prev' ? dayjs.subtract(1, 'month') : dayjs.add(1, 'month')
+  }
 
   function onSelect(item: DayType) {
     const { date, type } = item
@@ -98,19 +145,22 @@
           </tr>
         </thead>
       </slot>
-      <slot name="body" :dates>
-        <tbody :class="bodyClass">
+      <slot name="body" :days>
+        <tbody class="calendar_body" :class="bodyClass">
           <tr
-            v-for="(item, index) in dates"
+            v-for="(item, index) in days"
             :key="index"
             class="body_row"
             :class="body_rowClass"
           >
             <td
               v-for="it in item"
-              :key="it.value"
+              :key="it.date"
               class="body_col"
-              :class="body_colClass"
+              :class="[
+                body_colClass,
+                { hoverNotStyle: !it.value },
+              ]"
             >
               <div
                 :aria-selected="isSameDate(modelSelect, it.date) || undefined"
@@ -120,6 +170,7 @@
                   it.type !== 'current' ? day_outsideClass : '',
                   isToday(it.date) ? todayClass : '',
                   isSameDate(modelSelect, it.date) ? day_selectedClass : '',
+                  { hoverNotStyle: !it.value },
                 ]"
                 @click="onSelect(it)"
               >
@@ -152,13 +203,13 @@
       gap: 2px;
       align-items: center;
 
-      .action_button{
+      .action_button {
         cursor: pointer;
         padding: 2px;
         border-radius: 6px;
         color: #a3a3a3;
 
-        &:hover{
+        &:hover {
           background: #e5e5e5;
         }
       }
@@ -177,43 +228,55 @@
       .week_day {
         font-size: 12px;
         text-align: center;
-        flex:1;
+        flex: 1;
       }
     }
 
-    .body_row{
-      display: flex;
-    }
-    .body_col{
-      cursor: pointer;
-      display: flex;
-      flex:1;
-      align-items: center;
-      justify-content: center;
+    .calendar_body {
+      /* display: grid;
+      gap: 8px; */
 
-      .day{
-        height: 24px;
-        width: 24px;
-        line-height: 24px;
-        border-radius: 5px;
-        font-size: 12px;
-        text-align: center;
+      .body_row {
+        display: flex;
+      }
 
-        &:hover{
-          background:hsl(0deg 0% 0% / 5%) ;
+      .body_col {
+        cursor: pointer;
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+
+        .day {
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          border-radius: 5px;
+          font-size: 12px;
+          text-align: center;
+
+          &:hover {
+            background: hsl(0deg 0% 0% / 5%);
+          }
         }
-      }
 
-      .day_outside{
-        opacity: 50%;
-      }
+        .day_outside {
+          opacity: 50%;
+        }
 
-      .today{
-        color: #fff;
-        background: #38bdf8;
-      }
+        .today {
+          color: #fff !important;
+          background: #38bdf8 !important;
+        }
 
+      }
     }
+
+  }
+
+  .hoverNotStyle{
+    cursor: default !important;
+    background: none !important;
   }
 }
 </style>

@@ -14,14 +14,13 @@ export interface classesTypes {
   today: string
 }
 
-export type SizeType = 'large' | 'middle' | 'small'
 export type OnSelectValue = Pick<DayType, 'date' | 'type'>
 
 export interface VueDayCalendarProps {
   locale?: string
-  size?: SizeType
   classes?: Partial<classesTypes>
   format?: string
+  showOutsideDays?: boolean
 }
 
 export interface DayType {
@@ -29,3 +28,5 @@ export interface DayType {
   value: string
   type: 'prev' | 'current' | 'next'
 }
+
+export type MonthsTrigger = (type: 'prev' | 'next') => void

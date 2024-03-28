@@ -3,6 +3,7 @@
   import { VueDayCalendar } from 'vue-day-calendar'
 
   import Classes from './components/Classes/index.vue'
+  import ShowOutsideDays from './components/ShowOutsideDays.vue'
 
   // 2. 怎么去获取选中的状态 并添加选中后的样式
   // 3. 可以自定义日期 是否需要v-model
@@ -15,6 +16,11 @@
     <div class="w-[220px]">
       <h2>classes</h2>
       <Classes/>
+    </div>
+
+    <div class="w-[250px]">
+      <h2>showOutsideDays</h2>
+      <ShowOutsideDays/>
     </div>
 
     <div class="w-[250px]">
