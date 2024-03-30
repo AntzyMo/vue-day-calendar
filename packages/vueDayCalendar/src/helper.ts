@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import type { DayType } from './types'
 
-type DateOption = string | Date | undefined
+type DateOption = string | Date
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 
@@ -11,7 +11,8 @@ export function toDayjs(date: DateOption) {
   return date
 }
 
-export function isSameDate(target: DateOption, source: DateOption) {
+export function isSameDate(source: DateOption, target?: DateOption) {
+  if (!target) return false
   return dayjs(target).isSame(source, 'day')
 }
 

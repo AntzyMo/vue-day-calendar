@@ -1,21 +1,15 @@
 <script setup lang="ts">
-  import 'vue-day-calendar/style.css'
-  import { VueDayCalendar } from 'vue-day-calendar'
-
+  import Base from './components/Base.vue'
   import Classes from './components/Classes/index.vue'
   import MaxAndMinDate from './components/MaxAndMinDate.vue'
   import ShowOutsideDays from './components/ShowOutsideDays.vue'
-
-  // 2. 怎么去获取选中的状态 并添加选中后的样式
-  // 3. 可以自定义日期 是否需要v-model
-  // 5. 限制最大最小日期
-  </script>
+</script>
 
 <template>
   <div class="flex flex-col justify-center mt-10">
     <div class="w-[250px]">
       <h2>base</h2>
-      <VueDayCalendar/>
+      <Base/>
     </div>
 
     <div class="w-[220px]">

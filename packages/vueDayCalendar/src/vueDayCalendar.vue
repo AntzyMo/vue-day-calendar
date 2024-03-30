@@ -43,10 +43,11 @@
   const body_rowClass = computed(() => props.classes?.body_row)
   const body_colClass = computed(() => props.classes?.body_col)
   const dayClass = computed(() => props.classes?.day)
-  const day_selectedClass = computed(() => props.classes?.day_selected)
+  const day_selectedClass = computed(() => props.classes?.day_selected || 'selectedDay')
   const day_outsideClass = computed(() => props.classes?.day_outside || 'day_outside')
   const todayClass = computed(() => props.classes?.today || 'today')
 
+  // selected day
   const modelSelect = defineModel<string | Date>('selected')
 
   const dayjsRef = shallowRef(dayjs())
@@ -145,7 +146,8 @@
             class="action_button"
             :class="[
               { exceedDate: isExceedDate(props?.maxDate) },
-              head_actionClass]"
+              head_actionClass,
+            ]"
             @click="monthsTrigger('next')"
           />
         </div>
@@ -185,14 +187,14 @@
               ]"
             >
               <div
-                :aria-selected="isSameDate(modelSelect, it.date) || undefined"
+                :aria-selected="isSameDate(it.date, modelSelect) || undefined"
                 class="day"
                 :class="[
                   dayClass,
                   { hoverNotStyle: !it.value },
                   it.type !== 'current' ? day_outsideClass : '',
                   isToday(it.date) ? todayClass : '',
-                  isSameDate(modelSelect, it.date) ? day_selectedClass : '',
+                  isSameDate(it.date, modelSelect) ? day_selectedClass : '',
                 ]"
                 @click="onSelect(it)"
               >
@@ -255,9 +257,6 @@
     }
 
     .calendar_body {
-      /* display: grid;
-      gap: 8px; */
-
       .body_row {
         display: flex;
       }
@@ -287,8 +286,7 @@
         }
 
         .today {
-          color: #fff !important;
-          background: #38bdf8 !important;
+          font-weight: bold !important;
         }
 
       }
@@ -296,12 +294,16 @@
 
   }
 
-  .hoverNotStyle{
+  .selectedDay {
+    background: #e5e5e5 !important;
+  }
+
+  .hoverNotStyle {
     cursor: default !important;
     background: none !important;
   }
 
-  .exceedDate{
+  .exceedDate {
     cursor: not-allowed;
     opacity: 50%;
 
