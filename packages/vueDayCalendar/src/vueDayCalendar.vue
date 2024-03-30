@@ -87,7 +87,7 @@
     }
 
     if (!props.showOutsideDays) {
-      sevenMapArr = sevenMapArr.map(days => {
+      const handledCurrentArr = sevenMapArr.map(days => {
         return days.map(day => {
           if (day.type === 'current') {
             return day
@@ -98,8 +98,12 @@
           }
         })
       })
+      console.log('handledCurrentArr', handledCurrentArr)
+
+      sevenMapArr = handledCurrentArr.filter(days => days.some(day => day.type === 'current'))
     }
 
+    console.log('sevenMapArr', sevenMapArr)
     return sevenMapArr
   })
 
@@ -117,7 +121,8 @@
   }
 
   function onSelect(item: DayType) {
-    const { date, type } = item
+    const { date, type, value } = item
+    if (!value) return
     emit('select', {
       date,
       type
