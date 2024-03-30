@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@iconify-json/mingcute": "^1.1.17",
+    "dayjs": "^1.11.10",
     "unocss": "^0.58.6",
     "vue": "^3.4.21",
     "vue-day-calendar": "workspace:^"

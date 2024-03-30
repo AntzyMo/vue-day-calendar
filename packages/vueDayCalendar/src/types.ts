@@ -20,7 +20,18 @@ export interface VueDayCalendarProps {
   locale?: string
   classes?: Partial<classesTypes>
   format?: string
+  /**
+   * showOutsideDays
+   * @description Show the number of days excluding today's date.
+   */
   showOutsideDays?: boolean
+  maxDate?: Date
+  minDate?: Date
+  /**
+   * disableNavigation
+   * @description Disable navigation buttons
+   */
+  disableNavigation?: boolean
 }
 
 export interface DayType {

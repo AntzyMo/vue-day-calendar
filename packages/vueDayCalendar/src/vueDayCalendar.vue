@@ -11,15 +11,26 @@
   const props = withDefaults(defineProps<VueDayCalendarProps>(), {
     locale: 'en',
     format: 'YYYY 年 M 月',
-    showOutsideDays: false
+    showOutsideDays: false,
+    disableNavigation: false
   })
 
   const emit = defineEmits<{
     select: [value: OnSelectValue]
   }>()
 
+  defineSlots<{
+    head: (props: { date: string; tigger: MonthsTrigger }) => any
+    week: (props: { weekday: string[] }) => any
+    body: (props: { days: DayType[][] }) => any
+    footer: () => any
+  }>()
+
+  defineExpose({
+    monthsTrigger
+  })
+
   console.log('props', props)
-  const modelSelect = defineModel<string | Date>('selected')
 
   // classes computed
   const rootClass = computed(() => props.classes?.root)
@@ -36,16 +47,7 @@
   const day_outsideClass = computed(() => props.classes?.day_outside || 'day_outside')
   const todayClass = computed(() => props.classes?.today || 'today')
 
-  defineSlots<{
-    head: (props: { date: string; tigger: MonthsTrigger }) => any
-    week: (props: { weekday: string[] }) => any
-    body: (props: { days: DayType[][] }) => any
-    footer: () => any
-  }>()
-
-  defineExpose({
-    monthsTrigger
-  })
+  const modelSelect = defineModel<string | Date>('selected')
 
   const dayjsRef = shallowRef(dayjs())
   const year = computed(() => dayjsRef.value.format(props.format))
@@ -97,12 +99,19 @@
       })
     }
 
-    console.log('sevenMapArr', sevenMapArr)
     return sevenMapArr
   })
 
+  function isExceedDate(maxAndMinDate?: Date) {
+    return maxAndMinDate ? dayjsRef.value.isAfter(maxAndMinDate) : false
+  }
+
   function monthsTrigger(type: 'prev' | 'next') {
+    if (isExceedDate(props?.maxDate)) return
+    if (isExceedDate(props?.minDate)) return
+
     const dayjs = toValue(dayjsRef)
+
     dayjsRef.value = type === 'prev' ? dayjs.subtract(1, 'month') : dayjs.add(1, 'month')
   }
 
@@ -123,9 +132,22 @@
         <div class="head_date" :class="head_dateClass">
           {{ year }}
         </div>
-        <div class="action_block">
-          <IconLeftArrow class="action_button" :class="head_actionClass" @click="monthsTrigger('prev')"/>
-          <IconRightArrow class="action_button" :class="head_actionClass" @click="monthsTrigger('next')"/>
+        <div v-if="!disableNavigation" class="action_block">
+          <IconLeftArrow
+            class="action_button"
+            :class="[
+              { exceedDate: isExceedDate(props?.minDate) },
+              head_actionClass,
+            ]"
+            @click="monthsTrigger('prev')"
+          />
+          <IconRightArrow
+            class="action_button"
+            :class="[
+              { exceedDate: isExceedDate(props?.maxDate) },
+              head_actionClass]"
+            @click="monthsTrigger('next')"
+          />
         </div>
       </div>
     </slot>
@@ -158,8 +180,8 @@
               :key="it.date"
               class="body_col"
               :class="[
-                body_colClass,
                 { hoverNotStyle: !it.value },
+                body_colClass,
               ]"
             >
               <div
@@ -167,10 +189,10 @@
                 class="day"
                 :class="[
                   dayClass,
+                  { hoverNotStyle: !it.value },
                   it.type !== 'current' ? day_outsideClass : '',
                   isToday(it.date) ? todayClass : '',
                   isSameDate(modelSelect, it.date) ? day_selectedClass : '',
-                  { hoverNotStyle: !it.value },
                 ]"
                 @click="onSelect(it)"
               >
@@ -277,6 +299,15 @@
   .hoverNotStyle{
     cursor: default !important;
     background: none !important;
+  }
+
+  .exceedDate{
+    cursor: not-allowed;
+    opacity: 50%;
+
+    &:hover {
+      background: none;
+    }
   }
 }
 </style>
