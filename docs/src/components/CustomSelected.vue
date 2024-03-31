@@ -1,19 +1,20 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
 
-  import { type OnSelectValue, VueDayCalendar } from 'vue-day-calendar'
+  import { VueDayCalendar } from 'vue-day-calendar'
 
   const selected = ref()
+  const vueDayCalendarRef = ref<InstanceType< typeof VueDayCalendar>>()
   const selectedText = computed(() => {
     return selected.value ? `已选择：${selected.value}` : '请选择一天'
   })
-  function handleSelect(value: OnSelectValue) {
-    console.log('vlaue', value)
+  function goToToday() {
+    vueDayCalendarRef.value?.goToToday()
   }
 </script>
 
 <template>
-  <VueDayCalendar v-model:selected="selected" @select="handleSelect">
+  <VueDayCalendar ref="vueDayCalendarRef" v-model:selected="selected">
     <template #cell="{ item }">
       <div class="relative">
         <span>{{ item.value }}</span>
@@ -22,7 +23,10 @@
     </template>
 
     <template #footer>
-      <span class="text-sm">{{ selectedText }}</span>
+      <span class="mr-2 text-sm">{{ selectedText }}</span>
+      <button @click="goToToday">
+        go to today
+      </button>
     </template>
   </VueDayCalendar>
 </template>

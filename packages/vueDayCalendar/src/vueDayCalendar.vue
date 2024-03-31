@@ -25,7 +25,8 @@
   }>()
 
   defineExpose({
-    monthsTrigger
+    monthsTrigger,
+    goToToday
   })
 
   // classes computed
@@ -126,6 +127,9 @@
       type
     })
     modelSelect.value = item.date
+  }
+  function goToToday() {
+    dayjsRef.value = dayjs()
   }
 </script>
 
