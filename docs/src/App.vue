@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Base from './components/Base.vue'
+  import Locale from './components/Locale.vue'
   import Selected from './components/Selected.vue'
   import Classes from './components/Classes/index.vue'
   import MaxAndMinDate from './components/MaxAndMinDate.vue'
@@ -33,9 +34,15 @@
       <h2>Selected</h2>
       <Selected/>
     </div>
+
     <div class="w-[250px]">
       <h2>Custom Selected</h2>
       <CustomSelected/>
+    </div>
+
+    <div class="w-[250px]">
+      <h2>Locale</h2>
+      <Locale/>
     </div>
   </div>
 </template>

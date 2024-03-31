@@ -4,6 +4,7 @@ import type { DayType } from './types'
 type DateOption = string | Date
 
 const DATE_FORMAT = 'YYYY-MM-DD'
+export const YEAR_MONTH_FORMAT = 'MMMM YYYY'
 
 export function toDayjs(date: DateOption) {
   if (!date) return dayjs()

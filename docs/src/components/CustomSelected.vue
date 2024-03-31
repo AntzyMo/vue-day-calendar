@@ -3,7 +3,7 @@
 
   import { type OnSelectValue, VueDayCalendar } from 'vue-day-calendar'
 
-  const selected = ref('2024-4-13')
+  const selected = ref()
   const selectedText = computed(() => {
     return selected.value ? `已选择：${selected.value}` : '请选择一天'
   })

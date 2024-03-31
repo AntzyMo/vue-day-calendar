@@ -17,16 +17,36 @@ export interface classesTypes {
 export type OnSelectValue = Pick<DayType, 'date' | 'type'>
 
 export interface VueDayCalendarProps {
-  locale?: string
+  /**
+   * yearAndMonthFormat
+   * @description YearAndMonth format.
+   * Docs: https://day.js.org/docs/en/display/format
+   */
+  yearAndMonthFormat?: string
+  /**
+   * locale
+   * @description The locale of the calendar.
+   *  You can see https://github.com/iamkun/dayjs/tree/dev/src/locale
+   * @default 'en'
+   */
+  locale?: ILocale
+
+  /**
+   * classes
+   * @description Custom classes.
+   */
   classes?: Partial<classesTypes>
-  format?: string
+
   /**
    * showOutsideDays
    * @description Show the number of days excluding today's date.
    */
   showOutsideDays?: boolean
+
   maxDate?: Date
+
   minDate?: Date
+
   /**
    * disableNavigation
    * @description Disable navigation buttons

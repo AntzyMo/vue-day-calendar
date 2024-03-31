@@ -6,11 +6,9 @@
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
 
-  import { createDay, isSameDate, isToday } from './helper'
+  import { YEAR_MONTH_FORMAT, createDay, isSameDate, isToday } from './helper'
 
   const props = withDefaults(defineProps<VueDayCalendarProps>(), {
-    locale: 'en',
-    format: 'YYYY 年 M 月',
     showOutsideDays: false,
     disableNavigation: false
   })
@@ -30,8 +28,6 @@
     monthsTrigger
   })
 
-  console.log('props', props)
-
   // classes computed
   const rootClass = computed(() => props.classes?.root)
   const headClass = computed(() => props.classes?.head)
@@ -50,8 +46,12 @@
   // selected day
   const modelSelect = defineModel<string | Date>('selected')
 
+  if (props.locale) {
+    dayjs.locale(props.locale)
+  }
   const dayjsRef = shallowRef(dayjs())
-  const year = computed(() => dayjsRef.value.format(props.format))
+
+  const year = computed(() => dayjsRef.value.format(props.yearAndMonthFormat || YEAR_MONTH_FORMAT))
 
   const weekday: string[] = []
   for (let i = 1; i <= 7; i++) {
@@ -98,12 +98,10 @@
           }
         })
       })
-      console.log('handledCurrentArr', handledCurrentArr)
 
       sevenMapArr = handledCurrentArr.filter(days => days.some(day => day.type === 'current'))
     }
 
-    console.log('sevenMapArr', sevenMapArr)
     return sevenMapArr
   })
 
