@@ -14,7 +14,7 @@
 </script>
 
 <template>
-  <VueDayCalendar ref="vueDayCalendarRef" v-model:selected="selected">
+  <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
     <template #cell="{ item }">
       <div class="relative">
         <span>{{ item.value }}</span>

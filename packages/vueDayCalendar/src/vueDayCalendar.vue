@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import dayjs from 'dayjs'
   import { computed, shallowRef, toValue } from 'vue'
-  import type { DayType, MonthsTrigger, OnSelectValue, VueDayCalendarProps } from './types'
+  import type { DayType, MaxAndMinDateType, MonthsTrigger, OnSelectValue, VueDayCalendarProps } from './types'
 
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
@@ -45,7 +45,7 @@
   const todayClass = computed(() => props.classes?.today || 'today')
 
   // selected day
-  const modelSelect = defineModel<string | Date>('selected')
+  const modelValue = defineModel<string | Date>()
 
   if (props.locale) {
     dayjs.locale(props.locale)
@@ -106,7 +106,7 @@
     return sevenMapArr
   })
 
-  function isExceedDate(maxAndMinDate?: Date) {
+  function isExceedDate(maxAndMinDate?: MaxAndMinDateType) {
     return maxAndMinDate ? dayjsRef.value.isAfter(maxAndMinDate) : false
   }
 
@@ -126,7 +126,7 @@
       date,
       type
     })
-    modelSelect.value = item.date
+    modelValue.value = item.date
   }
   function goToToday() {
     dayjsRef.value = dayjs()
@@ -193,14 +193,14 @@
             ]"
           >
             <div
-              :aria-selected="isSameDate(it.date, modelSelect) || undefined"
+              :aria-selected="isSameDate(it.date, modelValue) || undefined"
               class="day"
               :class="[
                 dayClass,
                 { hoverNotStyle: !it.value },
                 it.type !== 'current' ? day_outsideClass : '',
                 isToday(it.date) ? todayClass : '',
-                isSameDate(it.date, modelSelect) ? day_selectedClass : '',
+                isSameDate(it.date, modelValue) ? day_selectedClass : '',
               ]"
               @click="onSelect(it)"
             >
