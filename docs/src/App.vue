@@ -1,7 +1,9 @@
 <script setup lang="ts">
   import Base from './components/Base.vue'
+  import Selected from './components/Selected.vue'
   import Classes from './components/Classes/index.vue'
   import MaxAndMinDate from './components/MaxAndMinDate.vue'
+  import CustomSelected from './components/CustomSelected.vue'
   import ShowOutsideDays from './components/ShowOutsideDays.vue'
 </script>
 
@@ -25,6 +27,15 @@
     <div class="w-[250px]">
       <h2>MaxAndMinDate</h2>
       <MaxAndMinDate/>
+    </div>
+
+    <div class="w-[250px]">
+      <h2>Selected</h2>
+      <Selected/>
+    </div>
+    <div class="w-[250px]">
+      <h2>Custom Selected</h2>
+      <CustomSelected/>
     </div>
   </div>
 </template>

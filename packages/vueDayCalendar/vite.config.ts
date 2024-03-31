@@ -9,7 +9,8 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      include: 'src'
+      include: 'src',
+      rollupTypes: true
     }),
     Icons()
   ],

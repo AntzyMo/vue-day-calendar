@@ -22,7 +22,7 @@
   defineSlots<{
     head: (props: { date: string; tigger: MonthsTrigger }) => any
     week: (props: { weekday: string[] }) => any
-    body: (props: { days: DayType[][] }) => any
+    cell: (props: { item: DayType }) => any
     footer: () => any
   }>()
 
@@ -174,41 +174,41 @@
           </tr>
         </thead>
       </slot>
-      <slot name="body" :days>
-        <tbody class="calendar_body" :class="bodyClass">
-          <tr
-            v-for="(item, index) in days"
-            :key="index"
-            class="body_row"
-            :class="body_rowClass"
+      <tbody class="calendar_body" :class="bodyClass">
+        <tr
+          v-for="(item, index) in days"
+          :key="index"
+          class="body_row"
+          :class="body_rowClass"
+        >
+          <td
+            v-for="it in item"
+            :key="it.date"
+            class="body_col"
+            :class="[
+              { hoverNotStyle: !it.value },
+              body_colClass,
+            ]"
           >
-            <td
-              v-for="it in item"
-              :key="it.date"
-              class="body_col"
+            <div
+              :aria-selected="isSameDate(it.date, modelSelect) || undefined"
+              class="day"
               :class="[
+                dayClass,
                 { hoverNotStyle: !it.value },
-                body_colClass,
+                it.type !== 'current' ? day_outsideClass : '',
+                isToday(it.date) ? todayClass : '',
+                isSameDate(it.date, modelSelect) ? day_selectedClass : '',
               ]"
+              @click="onSelect(it)"
             >
-              <div
-                :aria-selected="isSameDate(it.date, modelSelect) || undefined"
-                class="day"
-                :class="[
-                  dayClass,
-                  { hoverNotStyle: !it.value },
-                  it.type !== 'current' ? day_outsideClass : '',
-                  isToday(it.date) ? todayClass : '',
-                  isSameDate(it.date, modelSelect) ? day_selectedClass : '',
-                ]"
-                @click="onSelect(it)"
-              >
+              <slot name="cell" :item="it">
                 {{ it.value }}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </slot>
+              </slot>
+            </div>
+          </td>
+        </tr>
+      </tbody>
       <tfoot>
         <slot name="footer"/>
       </tfoot>
