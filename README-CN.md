@@ -1,7 +1,12 @@
-<p align="center">
-    <br> <a href="https://github.com/AntzyMo/vue-day-calendar">English</a> | 中文
+<p align=center>
+<a href="https://github.com/AntzyMo/vue-day-calendar"><img src="./assets/logo.svg" width="140" /></a>
 </p>
 
+<h1 align="center">
+<P>vue-day-calendar</p>
+
+<p style="font-size: initial;font-weight: normal;">English | <a href="README-CN.md">中文</a></p>
+</h1>
 # vue-day-calendar
 `day-calendar` 是 `Vue` 日期选择组件，以日历的方式去呈现，它具有简洁的外观，并且支持 `tailwindcsss` 和 `unocss` 可定制化样式修改，内置`Dayjs`。
 
@@ -24,6 +29,7 @@ pnpm add vue-day-calendar
 ## 属性
 | 属性名 | 说明 | 类型 | 默认值
 | ----- | ---- | ----| --- |
+| `modelValue` / `v-model` | 获取选中的值 | `string` | - |
 | `yearAndMonthFormat` | class 名为'head_date'的日期格式，更多格式：https://day.js.org/docs/en/display/format | `string` | `MMMM YYYY` |
 | `locale` | 加载语言配置，支持的语言：https://github.com/iamkun/dayjs/tree/dev/src/locale | `ILocale` | `en` |
 | `classes` | 可配置化样式，支持的类名有：https://github.com/AntzyMo/vue-day-calendar/blob/53ce7e70e6afc7bccda717f3a019a4dbbed5ec6b/packages/vueDayCalendar/src/types.ts#L3-L17 | `Partial<classesTypes>` | - |
@@ -31,6 +37,11 @@ pnpm add vue-day-calendar
 | `maxDate` | 限制最大日期 | `Date` / `Dayjs` | - |
 | `minDate` | 限制最小日期 | `Date` / `Dayjs` | - |
 | `disableNavigation` | 是否显示切换月份按钮 | `boolean` | - |
+
+## 事件
+| 事件名 | 说明 | 参数
+| ----- | ---- | ----|
+| `select` | 选中日期时触发 | `Function` |
 
 ## 插槽
 | 名称 | 说明 | 参数 
