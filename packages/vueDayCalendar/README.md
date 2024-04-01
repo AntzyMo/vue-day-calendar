@@ -45,7 +45,7 @@ pnpm add vue-day-calendar dayjs
 | ----- | ---- | ----|
 | `select` | Triggered when a date is selected | `Function` |
 
-## 插槽
+## slot
 | Name | Description | Params 
 | ----- | ---- | ----|  
 | `head` | Customize header content | https://github.com/AntzyMo/vue-day-calendar/blob/53ce7e70e6afc7bccda717f3a019a4dbbed5ec6b/packages/vueDayCalendar/src/vueDayCalendar.vue#L21 | 
