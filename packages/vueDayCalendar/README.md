@@ -1,5 +1,5 @@
 <p align=center>
-<a href="https://github.com/AntzyMo/vue-day-calendar"><img src="./assets/logo.svg" width="140"/></a>
+<a href="https://github.com/AntzyMo/vue-day-calendar"><img src="../../assets/logo.svg" width="140"/></a>
 </p>
 
 <h1 align="center">
