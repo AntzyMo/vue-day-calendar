@@ -10,11 +10,11 @@ vue-day-calendar
 <a href="https://github.com/AntzyMo/vue-day-calendar">English</a> | 中文
 </p>
 
-`day-calendar` 是 `Vue` 日期选择组件，以日历的方式去呈现，它具有简洁的外观，并且支持 `tailwindcsss` 和 `unocss` 可定制化样式修改，内置`Dayjs`。
+`day-calendar` 是 `Vue` 日期选择组件，以日历的方式去呈现，它具有简洁的外观，并且支持 `tailwindcsss` 和 `unocss` 可定制化样式修改.
 
 ## 安装
 ```shell
-pnpm add vue-day-calendar
+pnpm add vue-day-calendar dayjs
 ```
 
 ## 例子

@@ -21,10 +21,11 @@ export default defineConfig({
       fileName: format => `index.${format}.js`
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', 'dayjs'],
       output: {
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
+          dayjs: 'dayjs'
         }
       }
     }
