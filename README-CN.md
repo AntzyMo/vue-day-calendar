@@ -3,11 +3,13 @@
 </p>
 
 <h1 align="center">
-<P>vue-day-calendar</p>
-
-<p style="font-size: initial;font-weight: normal;">English | <a href="README-CN.md">中文</a></p>
+vue-day-calendar
 </h1>
-# vue-day-calendar
+
+<p align="center">
+English | <a href="README-CN.md">中文</a>
+</p>
+
 `day-calendar` 是 `Vue` 日期选择组件，以日历的方式去呈现，它具有简洁的外观，并且支持 `tailwindcsss` 和 `unocss` 可定制化样式修改，内置`Dayjs`。
 
 ## 安装

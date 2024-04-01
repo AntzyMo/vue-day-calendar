@@ -3,10 +3,12 @@
 </p>
 
 <h1 align="center">
-<P>vue-day-calendar</p>
-
-<p style="font-size: initial;font-weight: normal;">English | <a href="README-CN.md">中文</a></p>
+vue-day-calendar
 </h1>
+
+<p align="center">
+English | <a href="README-CN.md">中文</a>
+</p>
 
 `day-calendar` is a `Vue` date picker component that presents dates in a calendar format. It features a clean appearance and supports customizable styling with `tailwindcss` and `unocss`. It comes with built-in `Dayjs`.
 
