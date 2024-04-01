@@ -7,7 +7,7 @@ vue-day-calendar
 </h1>
 
 <p align="center">
-English | <a href="README-CN.md">中文</a>
+<a href="https://github.com/AntzyMo/vue-day-calendar">English</a> | 中文
 </p>
 
 `day-calendar` 是 `Vue` 日期选择组件，以日历的方式去呈现，它具有简洁的外观，并且支持 `tailwindcsss` 和 `unocss` 可定制化样式修改，内置`Dayjs`。
