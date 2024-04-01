@@ -8,13 +8,15 @@
   "scripts": {
     "dev": "pnpm --filter ./packages/vueDayCalendar dev",
     "build": "pnpm --filter ./packages/vueDayCalendar build",
-    "dev:docs": "pnpm --filter ./docs dev"
+    "dev:docs": "pnpm --filter ./docs dev",
+    "release": "bumpp ./packages/vueDayCalendar/package.json  --commit --push --tag"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@antzy/eslint-config": "^3.2.6",
+    "bumpp": "^9.4.0",
     "eslint": "^8.57.0"
   }
 }

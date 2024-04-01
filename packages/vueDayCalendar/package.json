@@ -19,6 +19,8 @@
   "files": [
     "dist"
   ],
+  "keywords": ["vue","dayPicker","calendar"],
+  "author": "AntzyMo <mozbano@163.com>",
   "scripts": {
     "dev": "vite build -w",
     "build": "vite build",
