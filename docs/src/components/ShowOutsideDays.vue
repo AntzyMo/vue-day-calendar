@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { VueDayCalendar } from 'vue-day-calendar'
+  import VueDayCalendar from 'vue-day-calendar'
 </script>
 
 <template>

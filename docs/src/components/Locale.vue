@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import zhcn from 'dayjs/locale/zh-cn'
 
-  import { VueDayCalendar } from 'vue-day-calendar'
+  import VueDayCalendar from 'vue-day-calendar'
 </script>
 
 <template>

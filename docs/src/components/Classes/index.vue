@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import IconButton from './IconButton.vue'
-  import { VueDayCalendar, type VueDayCalendarProps } from 'vue-day-calendar'
+  import  VueDayCalendar from 'vue-day-calendar'
+  import { type VueDayCalendarProps } from 'vue-day-calendar'
 
   const classes: VueDayCalendarProps['classes'] = {
     week_day: '!text-[10px]',

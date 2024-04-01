@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
 
-  import { type DayType, VueDayCalendar } from 'vue-day-calendar'
+  import VueDayCalendar from 'vue-day-calendar'
+  import { type DayType } from 'vue-day-calendar'
 
   const selected = ref('2024-4-13')
   const selectedText = computed(() => {

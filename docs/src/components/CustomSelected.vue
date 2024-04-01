@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
 
-  import { VueDayCalendar } from 'vue-day-calendar'
+  import VueDayCalendar from 'vue-day-calendar'
 
   const selected = ref()
   const vueDayCalendarRef = ref<InstanceType< typeof VueDayCalendar>>()
