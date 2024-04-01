@@ -9,7 +9,7 @@
     "dev": "pnpm --filter ./packages/vueDayCalendar dev",
     "build": "pnpm --filter ./packages/vueDayCalendar build",
     "dev:docs": "pnpm --filter ./docs dev",
-    "release": "bumpp ./packages/vueDayCalendar/package.json  --commit --push --tag"
+    "release": "bumpp ./packages/vueDayCalendar/package.json -r"
   },
   "keywords": [],
   "author": "",
