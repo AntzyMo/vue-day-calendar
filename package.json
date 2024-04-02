@@ -6,9 +6,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm --filter ./packages/vueDayCalendar dev",
-    "build": "pnpm --filter ./packages/vueDayCalendar build",
-    "docs": "pnpm --filter ./docs dev",
+    "dev": "pnpm -C ./packages/vueDayCalendar dev",
+    "build": "pnpm -C ./packages/vueDayCalendar build",
+    "docs": "pnpm -C ./docs dev",
     "docs:build": "pnpm run build && pnpm -C ./docs build",
     "release": "bumpp ./packages/vueDayCalendar/package.json -r"
   },

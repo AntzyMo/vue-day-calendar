@@ -11,21 +11,15 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: [],
-  theme: {
-    colors: {
-    }
-  },
+  rules:[
+    ['hoverItemBackground',{background:'hsl(0deg 0% 0% / 5%)'}]
+  ],
   presets: [
     presetUno(),
     presetAttributify(),
     presetIcons(),
     presetTypography(),
-    presetWebFonts({
-      fonts: {
-        // ...
-      }
-    })
+    presetWebFonts()
   ],
   transformers: [
     transformerDirectives(),
