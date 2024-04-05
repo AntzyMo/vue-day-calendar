@@ -228,6 +228,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: bold;
 
     .action_block {
       display: flex;
