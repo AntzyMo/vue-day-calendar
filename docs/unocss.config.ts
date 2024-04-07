@@ -23,7 +23,10 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       fonts: {
-        // ...
+        rubik: {
+          name: 'Rubik',
+          weights: ['400', '500', '700']
+        }
       }
     })
   ],

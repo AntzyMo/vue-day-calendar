@@ -10,12 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui-pro": "^1.1.0",
+    "@nuxt/image": "^1.5.0",
+    "dayjs": "^1.11.10",
     "nuxt": "^3.11.1",
     "vue": "^3.4.21",
+    "vue-day-calendar": "workspace:^",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@iconify-json/carbon": "^1.1.31",
     "@unocss/nuxt": "0.59.0-beta.1",
     "unocss": "^0.58.6"
   }
