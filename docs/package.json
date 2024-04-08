@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^2.12.1",
     "@nuxt/image": "^1.5.0",
     "dayjs": "^1.11.10",
     "nuxt": "^3.11.1",

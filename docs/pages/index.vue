@@ -22,7 +22,7 @@
         fit="contain"
         width="50"
         height="50"
-        loading="lazy"
+        preload
         class="mr-4"
       />
       <span class="text-xl">VueDayCalendar</span>
@@ -40,30 +40,32 @@
   <main>
     <section class="mt-20 pr-20 px-10" flex="~ justify-between items-center">
       <div class="font-bold leading-12 text-4xl">
-        <p class="w-400px">
-          The Vue <span class="text-red">day picker </span>
+        <p class="selectionRed w-400px">
+          The Vue <span class="selectionRed text-red">day picker </span>
         </p>
-        <p>component that presents dates</p>
-        <p>in a calendar format.</p>
+        <p class="selectionRed">
+          component that presents dates
+        </p>
+        <p class="selectionRed">
+          in a calendar format.
+        </p>
       </div>
-      <div>
-        <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
-          <template #footer>
-            <div class="w-230px">
-              <!-- todo: 需要改为format一样的格式 -->
-              <p class="my-2">
-                You picked {{ selected }}
-              </p>
-              <button class="bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-md" @click="goToToday">
-                Go to Today
-              </button>
-            </div>
-          </template>
-        </VueDayCalendar>
-      </div>
+      <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
+        <template #footer>
+          <div class="w-230px">
+            <!-- todo: 需要改为format一样的格式 -->
+            <p class="my-2">
+              You picked {{ selected }}
+            </p>
+            <button class="bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-md" @click="goToToday">
+              Go to Today
+            </button>
+          </div>
+        </template>
+      </VueDayCalendar>
     </section>
     <section>
-      <CodeBlock title="Installation" code="pnpm add vue-day-calendar dayjs"/>
+      <ContentDoc/>
     </section>
   </main>
 </template>

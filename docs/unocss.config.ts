@@ -11,11 +11,7 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: [],
-  theme: {
-    colors: {
-    }
-  },
+  shortcuts: [{ selectionRed: 'selection:(bg-red text-gray-100)' }],
   presets: [
     presetUno(),
     presetAttributify(),

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@unocss/nuxt', '@nuxt/image'],
+  modules: ['@unocss/nuxt', '@nuxt/image', 'nuxt-shiki', '@nuxt/content'],
   css: ['@unocss/reset/tailwind.css']
 })
