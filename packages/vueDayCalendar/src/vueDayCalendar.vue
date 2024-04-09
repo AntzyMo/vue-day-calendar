@@ -72,10 +72,7 @@
 
   const year = computed(() => dayjsRef.value.format(props.yearAndMonthFormat || YEAR_MONTH_FORMAT))
 
-  const weekday: string[] = []
-  for (let i = 1; i <= 7; i++) {
-    weekday.push(dayjsRef.value.day(i).format('dd'))
-  }
+  const weekday: string[] = Array.from({ length: 7 }, (_, i) => dayjsRef.value.day(i).format('dd'))
 
   const days = computed<DayType[][]>(() => {
     const totalDay = dayjsRef.value.daysInMonth()
