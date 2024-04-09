@@ -18,7 +18,7 @@ export interface classesTypes {
 
 export type OnSelectValue = Pick<DayType, 'date' | 'type'>
 
-export type MaxAndMinDateType = Date | Dayjs
+export type VDateType = Date | Dayjs
 export interface VueDayCalendarProps {
   /**
    * yearAndMonthFormat
@@ -46,15 +46,17 @@ export interface VueDayCalendarProps {
    */
   showOutsideDays?: boolean
 
-  maxDate?: MaxAndMinDateType
+  maxDate?: VDateType
 
-  minDate?: MaxAndMinDateType
+  minDate?: VDateType
 
   /**
    * disableNavigation
    * @description Disable navigation buttons
    */
   disableNavigation?: boolean
+
+  month?: VDateType | string
 }
 
 export interface DayType {

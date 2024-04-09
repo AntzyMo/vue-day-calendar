@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Base from './components/Base.vue'
+  import Month from './components/Month.vue'
   import Locale from './components/Locale.vue'
   import Selected from './components/Selected.vue'
   import Classes from './components/Classes/index.vue'
@@ -9,7 +10,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col justify-center mt-10">
+  <div class="grid grid-cols-4 ml-10 mt-11">
     <div class="w-[250px]">
       <h2>base</h2>
       <Base/>
@@ -43,6 +44,11 @@
     <div class="w-[250px]">
       <h2>Locale</h2>
       <Locale/>
+    </div>
+
+    <div class="w-[250px]">
+      <h2>Month</h2>
+      <Month/>
     </div>
   </div>
 </template>

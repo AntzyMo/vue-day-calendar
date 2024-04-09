@@ -10,6 +10,7 @@
     "build": "pnpm -C ./packages/vueDayCalendar build",
     "docs": "pnpm -C ./docs dev",
     "docs:build": "pnpm run build && pnpm -C ./docs build",
+    "example":"pnpm -C ./example dev",
     "release": "bumpp ./packages/vueDayCalendar/package.json -r"
   },
   "keywords": [],

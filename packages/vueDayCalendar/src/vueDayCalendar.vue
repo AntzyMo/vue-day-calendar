@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import dayjs from 'dayjs'
-  import { computed, shallowRef, toValue } from 'vue'
-  import type { DayType, MaxAndMinDateType, MonthsTrigger, OnSelectValue, VueDayCalendarProps } from './types'
+  import { computed, shallowRef, toValue, watch } from 'vue'
+  import type { DayType, MonthsTrigger, OnSelectValue, VDateType, VueDayCalendarProps } from './types'
 
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
@@ -47,10 +47,18 @@
   // selected day
   const modelValue = defineModel<string | Date>()
 
+  // 默认的日期
+  const defaultDay = computed(() => dayjs(props.month || new Date()))
   if (props.locale) {
-    dayjs.locale(props.locale)
+    defaultDay.value.locale(props.locale).format()
   }
-  const dayjsRef = shallowRef(dayjs())
+
+  // 需要改变的日期
+  const dayjsRef = shallowRef(defaultDay.value)
+
+  watch(defaultDay, val => {
+    dayjsRef.value = val
+  })
 
   const year = computed(() => dayjsRef.value.format(props.yearAndMonthFormat || YEAR_MONTH_FORMAT))
 
@@ -106,7 +114,7 @@
     return sevenMapArr
   })
 
-  function isExceedDate(maxAndMinDate?: MaxAndMinDateType) {
+  function isExceedDate(maxAndMinDate?: VDateType) {
     return maxAndMinDate ? dayjsRef.value.isAfter(maxAndMinDate) : false
   }
 
@@ -199,7 +207,7 @@
                 dayClass,
                 { hoverNotStyle: !it.value },
                 it.type !== 'current' ? day_outsideClass : '',
-                isToday(it.date) ? todayClass : '',
+                isToday(it.date, defaultDay) ? todayClass : '',
                 isSameDate(it.date, modelValue) ? day_selectedClass : '',
               ]"
               @click="onSelect(it)"

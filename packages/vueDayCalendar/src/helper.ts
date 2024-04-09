@@ -1,4 +1,6 @@
 import dayjs from 'dayjs'
+
+import type { Dayjs } from 'dayjs'
 import type { DayType } from './types'
 
 type DateOption = string | Date
@@ -17,8 +19,8 @@ export function isSameDate(source: DateOption, target?: DateOption) {
   return dayjs(target).isSame(source, 'day')
 }
 
-export function isToday(date: string | Date | undefined) {
-  return dayjs().isSame(date, 'day')
+export function isToday(date: string | Date | undefined, target?: Dayjs) {
+  return dayjs(target).isSame(date, 'day')
 }
 
 export function createDay(dateRaw: dayjs.Dayjs, type: 'prev' | 'current' | 'next'): DayType {
