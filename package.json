@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@antzy/eslint-config": "^3.2.6",
     "bumpp": "^9.4.0",
