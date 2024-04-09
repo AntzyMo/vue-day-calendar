@@ -12,6 +12,10 @@ English | <a href="README-CN.md">中文</a>
 
 `day-calendar` is a `Vue` date picker component that presents dates in a calendar format. It features a clean appearance and supports customizable styling with `tailwindcss` and `unocss`.
 
+
+![screenshot](./assets/screenshot.png)
+
+
 ## Installation
 ```shell
 pnpm add vue-day-calendar dayjs

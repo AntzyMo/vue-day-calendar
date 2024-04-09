@@ -20,7 +20,19 @@
 </script>
 
 <template>
-  <div class="font-rubik max-w-7xl mx-auto px-4 py-4">
+  <div class="font-rubik max-w-7xl mx-auto pt-4 px-4">
     <NuxtPage/>
+    <footer
+      class="pt-4  text-gray-500  text-xs"
+      border-t="~ gray-200"
+    >
+      <div>
+        <span>Made by</span>
+        <NuxtLink to="https://github.com/AntzyMo" target="_blank" class="hover:text-gray-700">
+          AntzyMo
+        </NuxtLink>
+        <span>&copy; 2024-PRESENT</span>
+      </div>
+    </footer>
   </div>
 </template>

@@ -40,13 +40,13 @@
   <main>
     <section class="mt-20 pr-20 px-10" flex="~ justify-between items-center">
       <div class="font-bold leading-12 text-4xl">
-        <p class="selectionRed w-400px">
-          The Vue <span class="selectionRed text-red">day picker </span>
+        <p class="w-400px">
+          The Vue <span class="text-red">day picker </span>
         </p>
-        <p class="selectionRed">
+        <p>
           component that presents dates
         </p>
-        <p class="selectionRed">
+        <p>
           in a calendar format.
         </p>
       </div>
@@ -64,8 +64,22 @@
         </template>
       </VueDayCalendar>
     </section>
-    <section>
+    <section class="md-class">
       <ContentDoc/>
     </section>
   </main>
 </template>
+
+<style lang="postcss">
+::selection{
+  @apply bg-red! text-gray-100!;
+}
+
+.md-class {
+  @apply font-rubik;
+
+  h1 {
+    @apply text-xl mb-2;
+  }
+}
+</style>
