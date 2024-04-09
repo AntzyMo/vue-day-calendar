@@ -23,7 +23,7 @@
   <div class="font-rubik max-w-7xl mx-auto pt-4 px-4">
     <NuxtPage/>
     <footer
-      class="pt-4  text-gray-500  text-xs"
+      class="py-6 text-gray-500 text-xs"
       border-t="~ gray-200"
     >
       <div>

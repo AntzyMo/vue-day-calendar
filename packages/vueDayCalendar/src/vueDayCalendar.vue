@@ -1,7 +1,14 @@
 <script setup lang="ts">
   import dayjs from 'dayjs'
   import { computed, shallowRef, toValue, watch } from 'vue'
-  import type { DayType, MonthsTrigger, OnSelectValue, VDateType, VueDayCalendarProps } from './types'
+  import type {
+    DayType,
+    EventChange,
+    EventSelect,
+    MonthsTrigger,
+    VDateType,
+    VueDayCalendarProps
+  } from './types'
 
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
@@ -14,7 +21,10 @@
   })
 
   const emit = defineEmits<{
-    select: [value: OnSelectValue]
+    /** select change */
+    select: [value: EventSelect]
+    /** month change */
+    change: [value: EventChange]
   }>()
 
   defineSlots<{
@@ -125,6 +135,11 @@
     const dayjs = toValue(dayjsRef)
 
     dayjsRef.value = type === 'prev' ? dayjs.subtract(1, 'month') : dayjs.add(1, 'month')
+
+    emit('change', {
+      type,
+      value: dayjsRef.value.format('YYYY-MM')
+    })
   }
 
   function onSelect(item: DayType) {

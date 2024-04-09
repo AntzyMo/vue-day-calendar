@@ -8,14 +8,17 @@
   function handleMonth(value: string) {
     month.value = value
   }
+  function onMonthChange(val) {
+    console.log('val Month', val)
+  }
 </script>
 
 <template>
-  <button @click="handleMonth('2023-01-6')">
-    2023-01-12
+  <button @click="handleMonth('2023-01-06')">
+    2023-01-06
   </button>
   <button @click="handleMonth('2024-04-12')">
     2024-04-12
   </button>
-  <VueDayCalendar :month/>
+  <VueDayCalendar :month @change="onMonthChange"/>
 </template>

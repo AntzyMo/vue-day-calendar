@@ -15,6 +15,17 @@ English | <a href="README-CN.md">中文</a>
 
 ![screenshot](./assets/screenshot.png)
 
+## ✨ Main features
+-  A calendar component focused on date selection
+-  Using [dayjs](https://dayjs.gitee.io/en) as the date library
+-  Localizable into any language
+-  Easy to style and customize
+
+> **Note**  
+> The documentation is still being perfected, you can first take a look at the [demo](https://github.com/AntzyMo/vue-day-calendar/tree/main/example/src/components)
+
+## Contribution guide
+If you encounter any problems during use, feel free to submit an [issue](https://github.com/AntzyMo/vue-day-calendar/issues) or **pull request**, and we will resolve it as soon as possible.
 
 ## Installation
 ```shell
@@ -32,6 +43,7 @@ pnpm add vue-day-calendar dayjs
   <VueDayCalendar/>
 </template>
 ```
+
 ## Attributes
 | Name | Description | Type | Default
 | ----- | ---- | ----| --- |
@@ -43,11 +55,15 @@ pnpm add vue-day-calendar dayjs
 | `maxDate` | Limit the maximum date | `Date` / `Dayjs` | - |
 | `minDate` | Limit the minimum date | `Date` / `Dayjs` | - |
 | `disableNavigation` | Whether to display the switch month button | `boolean` | - |
+| `month` | Customize the current month | `string` / `Date` / `Dayjs` | `new Date()` |
+
 
 ## Events
 | Name | Description | Params
 | ----- | ---- | ----|
 | `select` | Triggered when a date is selected | `Function` |
+| `change` | Triggered when the month is selected | `Function` |
+
 
 ## slot
 | Name | Description | Params 
@@ -63,10 +79,7 @@ pnpm add vue-day-calendar dayjs
 | `monthsTrigger` | Method of switching months | `Function` | 
 | `goToToday` | Method to return to today | `Function` | 
 
-## Contribution guide
-- `git checkout` create a new branch
-- The commits of fix & feat will be used to generate the changelog
-  
+
 ## License
 [MIT](./LICENSE) License &copy; 2024-PRESENT [AntzyMo](https://github.com/AntzyMo)
 

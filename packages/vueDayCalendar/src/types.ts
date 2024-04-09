@@ -16,7 +16,11 @@ export interface classesTypes {
   today: string
 }
 
-export type OnSelectValue = Pick<DayType, 'date' | 'type'>
+export type EventSelect = Pick<DayType, 'date' | 'type'>
+export interface EventChange {
+  type: 'prev' | 'next'
+  value: string
+}
 
 export type VDateType = Date | Dayjs
 export interface VueDayCalendarProps {
