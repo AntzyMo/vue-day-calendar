@@ -14,7 +14,7 @@
     ogTitle: 'VueDayCalendar · Vue Calendar Component',
     description: 'VueDayCalendar is a Vue date picker component that presents dates in a calendar format. It features a clean appearance and supports customizable styling with tailwindcss and unocss.',
     ogDescription: 'VueDayCalendar is a Vue date picker component that presents dates in a calendar format. It features a clean appearance and supports customizable styling with tailwindcss and unocss.',
-    ogImage: '/logo.svg'
+    ogImage: '/screenshot.png'
 
   })
 </script>
