@@ -25,7 +25,7 @@
       />
     </button>
 
-    <pre class="bg-gray-100  mb-4  p-2  rounded-md"><slot/></pre>
+    <pre class="bg-gray-100  mb-4  p-2  pl-3  rounded-md"><slot/></pre>
   </div>
 </template>
 

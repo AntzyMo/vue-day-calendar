@@ -72,7 +72,7 @@
 
 <style lang="postcss">
 ::selection{
-  @apply bg-red! text-gray-100!;
+  @apply bg-red! text-white!;
 }
 
 .md-class {

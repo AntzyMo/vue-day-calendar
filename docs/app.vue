@@ -20,8 +20,10 @@
 </script>
 
 <template>
-  <div class="font-rubik max-w-7xl mx-auto pt-4 px-4">
-    <NuxtPage/>
+  <div class="font-rubik h-100vh max-w-7xl mx-auto pt-4 px-4" flex="~ col">
+    <div class="flex-1">
+      <NuxtPage/>
+    </div>
     <footer
       class="py-6 text-gray-500 text-xs"
       border-t="~ gray-200"
