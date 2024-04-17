@@ -6,7 +6,6 @@ import type { DayType } from './types'
 type DateOption = string | Date
 
 const DATE_FORMAT = 'YYYY-MM-DD'
-export const YEAR_MONTH_FORMAT = 'MMMM YYYY'
 
 export function toDayjs(date: DateOption) {
   if (!date) return dayjs()
@@ -23,10 +22,14 @@ export function isToday(date: string | Date | undefined, target?: Dayjs) {
   return dayjs(target).isSame(date, 'day')
 }
 
-export function createDay(dateRaw: dayjs.Dayjs, type: 'prev' | 'current' | 'next'): DayType {
+export function createDay(type: 'prev' | 'current' | 'next', dateRaw: dayjs.Dayjs): DayType {
   return {
     date: dateRaw.format(DATE_FORMAT),
-    value: dateRaw.format('D'),
+    value: dateRaw?.format('D'),
     type
   }
+}
+
+export function createNextDay(dateRaw: dayjs.Dayjs, day: number): DayType {
+  return createDay('next', dateRaw.endOf('month').add(day + 1, 'day'))
 }

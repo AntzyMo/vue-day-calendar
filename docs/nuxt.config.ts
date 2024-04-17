@@ -7,5 +7,13 @@ export default defineNuxtConfig({
     highlight: {
       theme: 'vitesse-light'
     }
-  }
+  },
+  components: [
+    {
+      path: '~/components/demo',
+      pathPrefix: false,
+      global: true
+    },
+    '~/components'
+  ]
 })

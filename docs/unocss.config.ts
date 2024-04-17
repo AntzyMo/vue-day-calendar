@@ -11,6 +11,9 @@ import {
 } from 'unocss'
 
 export default defineConfig({
+  shortcuts: {
+    btn: 'bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-md'
+  },
   presets: [
     presetUno(),
     presetAttributify(),

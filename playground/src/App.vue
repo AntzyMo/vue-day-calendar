@@ -4,6 +4,8 @@
   import Locale from './components/Locale.vue'
   import Selected from './components/Selected.vue'
   import Classes from './components/Classes/index.vue'
+  import FixedWeeks from './components/FixedWeeks.vue'
+  import SelectedDays from './components/SelectedDays.vue'
   import MaxAndMinDate from './components/MaxAndMinDate.vue'
   import CustomSelected from './components/CustomSelected.vue'
   import ShowOutsideDays from './components/ShowOutsideDays.vue'
@@ -49,6 +51,16 @@
     <div class="w-[250px]">
       <h2>Month</h2>
       <Month/>
+    </div>
+
+    <div class="w-[250px]">
+      <h2>fixedweeks</h2>
+      <FixedWeeks/>
+    </div>
+
+    <div class="w-[250px]">
+      <h2>SelectedDays</h2>
+      <SelectedDays/>
     </div>
   </div>
 </template>

@@ -22,45 +22,49 @@ export interface EventChange {
   value: string
 }
 
-export type VDateType = Date | Dayjs
+export type VDateType = Date | Dayjs | string
 export interface VueDayCalendarProps {
   /**
-   * yearAndMonthFormat
-   * @description YearAndMonth format.
+   * YearAndMonth format.
    * Docs: https://day.js.org/docs/en/display/format
    */
   yearAndMonthFormat?: string
   /**
-   * locale
-   * @description The locale of the calendar.
-   *  You can see https://github.com/iamkun/dayjs/tree/dev/src/locale
+   * The locale of the calendar.
+   * You can see https://github.com/iamkun/dayjs/tree/dev/src/locale
    * @default 'en'
    */
   locale?: ILocale
 
   /**
-   * classes
-   * @description Custom classes.
+   * Custom classes.
    */
   classes?: Partial<classesTypes>
 
   /**
-   * showOutsideDays
-   * @description Show the number of days excluding today's date.
+   * Show the number of days excluding today's date.
    */
   showOutsideDays?: boolean
 
+  /**
+   * Maximum display date.
+   */
   maxDate?: VDateType
 
+  /**
+   * Minimum display date.
+   */
   minDate?: VDateType
 
   /**
-   * disableNavigation
-   * @description Disable navigation buttons
+   * Disable navigation buttons
    */
   disableNavigation?: boolean
 
-  month?: VDateType | string
+  /**
+   * Fixed number of weeks.
+   */
+  fixedWeeks?: boolean | number
 }
 
 export interface DayType {

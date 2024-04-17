@@ -13,7 +13,7 @@
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
 
-  import { YEAR_MONTH_FORMAT, createDay, isSameDate, isToday } from './helper'
+  import { createDay, createNextDay, isSameDate, isToday } from './helper'
 
   const props = withDefaults(defineProps<VueDayCalendarProps>(), {
     showOutsideDays: false,
@@ -26,6 +26,9 @@
     /** month change */
     change: [value: EventChange]
   }>()
+
+  const YEAR_MONTH_FORMAT = 'MMMM YYYY'
+  const FIXED_WEEKS = 6
 
   defineSlots<{
     head: (props: { date: string; tigger: MonthsTrigger }) => any
@@ -54,11 +57,13 @@
   const day_outsideClass = computed(() => props.classes?.day_outside || 'day_outside')
   const todayClass = computed(() => props.classes?.today || 'today')
 
-  // selected day
+  // v-model selected day
   const modelValue = defineModel<string | Date>()
+  // v-model month
+  const modelMonth = defineModel<VDateType>('month')
 
   // 默认的日期
-  const defaultDay = computed(() => dayjs(props.month || new Date()))
+  const defaultDay = computed(() => dayjs(modelMonth.value || new Date()))
   if (props.locale) {
     defaultDay.value.locale(props.locale).format()
   }
@@ -78,60 +83,58 @@
     const totalDay = dayjsRef.value.daysInMonth()
     const startDay = dayjsRef.value.startOf('month').day()
 
-    const daysArr: DayType[] = []
+    const startDays = Array.from({ length: startDay }, (_, i) => createDay('prev', dayjsRef.value.startOf('month').subtract(startDay - i, 'day')))
 
-    for (let i = startDay - 1; i >= 1; i--) {
-      const dateRaw = dayjsRef.value.startOf('month').subtract(i, 'day')
-      daysArr.push(createDay(dateRaw, 'prev'))
+    const currentMonthDays = Array.from({ length: totalDay }, (_, i) => createDay('current', dayjsRef.value.date(i + 1)))
+
+    const monthDays = [...startDays, ...currentMonthDays]
+
+    if (props.showOutsideDays && props.fixedWeeks) {
+      const totalDay = (typeof props.fixedWeeks === 'boolean' ? FIXED_WEEKS : props.fixedWeeks) * 7
+      if (monthDays.length < totalDay) {
+        monthDays.push(...Array.from({ length: totalDay - monthDays.length }, (_, i) => createNextDay(dayjsRef.value, i)))
+      }
     }
 
-    for (let day = 1; day <= totalDay; day++) {
-      const dateRaw = dayjsRef.value.date(day)
-      daysArr.push(createDay(dateRaw, 'current'))
+    const weekDays: DayType[][] = []
+    while (monthDays.length) {
+      weekDays.push(monthDays.splice(0, 7))
     }
 
-    const nextOutsideDayNumber = 42 - daysArr.length
+    weekDays.forEach(days => {
+      if (days.length < 7) {
+        days.push(...Array.from({ length: 7 - days.length }, (_, i) => createNextDay(dayjsRef.value, i)))
+      }
 
-    for (let i = 1; i <= nextOutsideDayNumber; i++) {
-      const dateRaw = dayjsRef.value.endOf('month').add(i, 'day')
-      daysArr.push(createDay(dateRaw, 'next'))
-    }
-
-    let sevenMapArr: DayType[][] = []
-    while (daysArr.length) {
-      sevenMapArr.push(daysArr.splice(0, 7))
-    }
-
-    if (!props.showOutsideDays) {
-      const handledCurrentArr = sevenMapArr.map(days => {
-        return days.map(day => {
-          if (day.type === 'current') {
-            return day
-          }
-          return {
-            ...day,
-            value: ''
+      if (!props.showOutsideDays) {
+        days.forEach(day => {
+          if (day.type !== 'current') {
+            day.value = ''
           }
         })
-      })
+      }
+    })
 
-      sevenMapArr = handledCurrentArr.filter(days => days.some(day => day.type === 'current'))
-    }
-
-    return sevenMapArr
+    return weekDays
   })
 
-  function isExceedDate(maxAndMinDate?: VDateType) {
-    return maxAndMinDate ? dayjsRef.value.isAfter(maxAndMinDate) : false
+  function isAfterDate(maxDate?: VDateType) {
+    return maxDate && dayjsRef.value.isAfter(dayjs(maxDate))
+  }
+
+  function isBeforeDate(minDate?: VDateType) {
+    return minDate && dayjsRef.value.isBefore(dayjs(minDate))
   }
 
   function monthsTrigger(type: 'prev' | 'next') {
-    if (isExceedDate(props?.maxDate)) return
-    if (isExceedDate(props?.minDate)) return
+    if (type === 'next' && isAfterDate(props.maxDate)) return
+    if (type === 'prev' && isBeforeDate(props.minDate)) return
 
     const dayjs = toValue(dayjsRef)
 
     dayjsRef.value = type === 'prev' ? dayjs.subtract(1, 'month') : dayjs.add(1, 'month')
+
+    modelMonth.value = dayjsRef.value.format('YYYY-MM')
 
     emit('change', {
       type,
@@ -140,16 +143,20 @@
   }
 
   function onSelect(item: DayType) {
-    const { date, type, value } = item
-    if (!value) return
+    const { date, type } = item
+    if (type !== 'current') return
+
     emit('select', {
       date,
       type
     })
+
     modelValue.value = item.date
   }
+
   function goToToday() {
     dayjsRef.value = dayjs()
+    modelMonth.value = dayjsRef.value.format('YYYY-MM')
   }
 </script>
 
@@ -164,7 +171,7 @@
           <IconLeftArrow
             class="action_button"
             :class="[
-              { exceedDate: isExceedDate(props?.minDate) },
+              { exceedDate: isBeforeDate(props.minDate) },
               head_actionClass,
             ]"
             @click="monthsTrigger('prev')"
@@ -172,7 +179,7 @@
           <IconRightArrow
             class="action_button"
             :class="[
-              { exceedDate: isExceedDate(props?.maxDate) },
+              { exceedDate: isAfterDate(props.maxDate) },
               head_actionClass,
             ]"
             @click="monthsTrigger('next')"
@@ -217,7 +224,7 @@
               class="day"
               :class="[
                 dayClass,
-                { hoverNotStyle: !it.value },
+                { hoverNotStyle: it.type !== 'current' },
                 it.type !== 'current' ? day_outsideClass : '',
                 isToday(it.date, defaultDay) ? todayClass : '',
                 isSameDate(it.date, modelValue) ? day_selectedClass : '',
@@ -281,7 +288,7 @@
       .week_day {
         font-size: 12px;
         text-align: center;
-        flex: 1;
+        width: calc(100% / 7);
       }
     }
 
@@ -291,9 +298,9 @@
       }
 
       .body_col {
+        width: calc(100% / 7);
         cursor: pointer;
         display: flex;
-        flex: 1;
         align-items: center;
         justify-content: center;
 
