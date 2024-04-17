@@ -17,21 +17,25 @@
 <template>
   <main>
     <section class="mt-20 pr-20 px-10" flex="~ justify-between items-center">
-      <div class="font-bold leading-12 text-4xl">
-        <p class="w-400px">
-          The Vue <span class="text-red">day picker </span>
-        </p>
-        <p>
-          component that presents dates
-        </p>
-        <p>
-          in a calendar format.
-        </p>
+      <div>
+        <div class="font-bold leading-12 mb-5 text-4xl">
+          <p class="w-400px">
+            The Vue <span class="text-red">day picker </span>
+          </p>
+          <p>
+            component that presents dates
+          </p>
+          <p>
+            in a calendar format.
+          </p>
+        </div>
+        <NuxtLink to="/guide/getting-started" class="bg-red hover:bg-red-500/90 px-4 py-2 rounded-md text-white">
+          Get Started
+        </NuxtLink>
       </div>
       <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
         <template #footer>
           <div class="w-230px">
-            <!-- todo: 需要改为format一样的格式 -->
             <p class="my-2">
               You picked {{ selected }}
             </p>
