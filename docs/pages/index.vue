@@ -58,7 +58,7 @@
 }
 
 .md-class {
-  @apply font-rubik;
+  @apply font-rubikAndNotoSansCC;
 
   h1 {
     @apply text-xl mb-2;

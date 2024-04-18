@@ -21,10 +21,16 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       fonts: {
-        rubik: {
-          name: 'Rubik',
-          weights: ['400', '500', '700']
-        }
+        rubikAndNotoSansCC: [
+          {
+            name: 'Rubik',
+            weights: ['400', '500', '700']
+          },
+          {
+            name: 'Noto Sans SC',
+            weights: ['400', '500', '700']
+          }
+        ]
       }
     })
   ],

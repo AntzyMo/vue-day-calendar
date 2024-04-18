@@ -1,5 +1,5 @@
 <template>
-  <div class="font-rubik h-100vh max-w-7xl mx-auto pt-4 px-4" flex="~ col">
+  <div class="font-rubikAndNotoSansCC h-100vh max-w-7xl mx-auto pt-4 px-4" flex="~ col">
     <header class="font-500" flex="~ items-center justify-between">
       <NuxtLink to="/" flex="~ items-center">
         <NuxtImg

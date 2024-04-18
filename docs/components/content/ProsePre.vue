@@ -31,6 +31,6 @@
 
 <style lang="postcss">
 pre code {
-  @apply text-md;
+  @apply text-sm;
 }
 </style>

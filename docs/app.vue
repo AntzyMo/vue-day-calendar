@@ -20,7 +20,14 @@
 </script>
 
 <template>
+  <NuxtLoadingIndicator :throttle="100"/>
   <NuxtLayout>
     <NuxtPage/>
   </NuxtLayout>
 </template>
+
+<style>
+html{
+  scrollbar-gutter: stable
+}
+</style>

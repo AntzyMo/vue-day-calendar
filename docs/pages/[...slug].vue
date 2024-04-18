@@ -1,10 +1,15 @@
 <script setup lang="ts">
   const route = useRoute()
+  const router = useRouter()
 
   const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
   const docsMenus = navigation.value?.filter(item => !!item?.children)
 
   const { data } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+
+  if (data.value && typeof data.value?._dir !== 'string') {
+    router.replace(data.value._dir.navigation.redirect)
+  }
 </script>
 
 <template>
@@ -30,14 +35,25 @@
   h1{
     @apply text-3xl font-500 mb-3;
   }
+
   h2{
-    @apply text-lg font-bold;
+    @apply text-lg font-500 mb-3 mt-5;
   }
+
   p{
-    @apply text-base mb-4;
+    @apply text-base mb-4 leading-7 text-gray-700;
   }
+
   .preClass{
     @apply w-650px!;
+  }
+
+  :not(pre) > code{
+    @apply bg-gray-100  rounded-md mx-1 px-1 py-0.5 text-xs border;
+  }
+
+  ul{
+    @apply list-disc ml-6;
   }
 }
 </style>

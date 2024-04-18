@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <button class="btn" @click="disableNavigation = !disableNavigation">
+    <button class="btn mb-4" @click="disableNavigation = !disableNavigation">
       Toggle Disable Navigation
     </button>
     <VueDayCalendar :disable-navigation/>
