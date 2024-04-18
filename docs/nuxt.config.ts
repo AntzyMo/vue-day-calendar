@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   modules: ['@unocss/nuxt', '@nuxt/image', '@nuxt/content', '@vueuse/nuxt'],
   css: ['@unocss/reset/tailwind.css'],
   content: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
     highlight: {
       theme: 'vitesse-light'
     }

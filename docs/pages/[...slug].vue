@@ -25,8 +25,8 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    暂无数据
+  <div v-else class="h-full" flex="~ items-center justify-center">
+    <h1>Page not found</h1>
   </div>
 </template>
 
