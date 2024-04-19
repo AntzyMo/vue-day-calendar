@@ -23,7 +23,7 @@
   <div class="pr-2" flex="~  justify-between">
     <div
       ref="codeBolckRef"
-      class="relative  rounded-md"
+      class="mb-4  relative  rounded-md"
       :style="[isCollapsedMask && isCollapsed ? { height: `${MAX_CODE_BLOCK_HEIGHT}px`, overflow: 'hidden' } : { overflow: 'auto' }]"
     >
       <ContentSlot/>
