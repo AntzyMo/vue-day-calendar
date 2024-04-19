@@ -63,10 +63,10 @@
   const modelMonth = defineModel<VDateType>('month')
 
   // 默认的日期
-  const defaultDay = computed(() => dayjs(modelMonth.value || new Date()))
-  if (props.locale) {
-    defaultDay.value.locale(props.locale).format()
-  }
+  const defaultDay = computed(() => {
+    const dayjsInstance = dayjs(modelMonth.value || new Date())
+    return props.locale ? dayjsInstance.locale(props.locale) : dayjsInstance
+  })
 
   // 需要改变的日期
   const dayjsRef = shallowRef(defaultDay.value)
