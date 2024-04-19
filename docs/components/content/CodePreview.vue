@@ -7,11 +7,9 @@
   const MAX_CODE_BLOCK_HEIGHT = 500
 
   const codeBolckRef = ref<HTMLDivElement | null>()
+
   const isCollapsedMask = ref(false)
   const isCollapsed = ref(true)
-  watch(isCollapsed, val => {
-    console.log('val', val)
-  })
 
   onMounted(() => {
     const codeBlock = toValue(codeBolckRef)

@@ -5,7 +5,7 @@
   const { data: navigation } = await useAsyncData('navigation', () => fetchContentNavigation())
   const docsMenus = navigation.value?.filter(item => !!item?.children)
 
-  const { data } = await useAsyncData(route.path, () => queryContent(route.path).findOne())
+  const data = await useLocaleFetchContent(route.path)
 
   if (data.value && typeof data.value?._dir !== 'string') {
     router.replace(data.value._dir.navigation.redirect)

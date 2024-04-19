@@ -34,7 +34,7 @@
       @change="monthChange"
     >
       <template #footer>
-        <span class="text-sm">当前月份为：{{ month }}</span>
+        <span class="text-sm">{{ $t(`index.currentMonth`) }}: {{ month }}</span>
       </template>
     </VueDayCalendar>
   </div>

@@ -20,24 +20,24 @@
       <div>
         <div class="font-bold leading-12 mb-5 text-4xl">
           <p class="w-400px">
-            The Vue <span class="text-red">day picker </span>
+            {{ $t('index.title') }} <span class="text-red">{{ $t('index.title1') }}</span>
           </p>
           <p>
-            component that presents dates
+            {{ $t('index.title2') }}
           </p>
           <p>
-            in a calendar format.
+            {{ $t('index.title3') }}
           </p>
         </div>
         <NuxtLink to="/guide/getting-started" class="bg-red hover:bg-red-500/90 px-4 py-2 rounded-md text-white">
-          Get Started
+          {{ $t('index.button') }}
         </NuxtLink>
       </div>
       <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
         <template #footer>
           <div class="w-230px">
             <p class="my-2">
-              You picked {{ selected }}
+              {{ $t('index.vueDayCalendarFooterText') }} {{ selected }}
             </p>
             <button class="bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-md" @click="goToToday">
               Go to Today

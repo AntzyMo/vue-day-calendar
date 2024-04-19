@@ -12,7 +12,7 @@
     :key="item._path"
   >
     <button class="mb-3  text-left  w-full">
-      {{ item.title }}
+      {{ $t(`menu.${item.title}`) }}
     </button>
     <div
       class="gap-2 ml-3"
@@ -29,7 +29,7 @@
           'text-red border-red!': $route.path === it._path,
         }"
       >
-        {{ it.title }}
+        {{ $t(`menu.${it.title}`) }}
       </NuxtLink>
     </div>
   </div>

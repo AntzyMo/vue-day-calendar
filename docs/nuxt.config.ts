@@ -1,7 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@unocss/nuxt', '@nuxt/image', '@nuxt/content', '@vueuse/nuxt'],
+  modules: [
+    '@unocss/nuxt',
+    '@nuxt/image',
+    '@nuxt/content',
+    '@vueuse/nuxt',
+    '@nuxtjs/i18n'
+  ],
   css: ['@unocss/reset/tailwind.css'],
   content: {
     defaultLocale: 'en',

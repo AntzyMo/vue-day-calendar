@@ -3,11 +3,13 @@
 
   import VueDayCalendar from 'vue-day-calendar'
 
+  const { t } = useI18n()
+
   const selected = ref('2024-4-13')
   const selectedText = computed(() => {
     return selected.value
-      ? `已选择：${selected.value}`
-      : '请选择一天'
+      ? `${t('index.vueDayCalendarFooterText')}：${selected.value}`
+      : `${t('index.pickNotText')}`
   })
 </script>
 
