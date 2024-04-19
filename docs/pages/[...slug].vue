@@ -40,10 +40,6 @@
     @apply text-lg font-500 mb-3 mt-5;
   }
 
-  p{
-    @apply text-base mb-4 leading-7 text-gray-700;
-  }
-
   .preClass{
     @apply w-650px!;
   }
@@ -54,6 +50,22 @@
 
   ul{
     @apply list-disc ml-6;
+  }
+
+  :not(h2) > a {
+    @apply underline-none! underline-transparent!;
+
+    code{
+      @apply border-red border-dashed  bg-red-100 hover:bg-red-200;
+    }
+  }
+
+  p{
+    @apply text-base mb-4 leading-7 text-gray-700;
+
+    a{
+      @apply underline underline-dashed underline-offset-4 hover:underline-red-500 underline-red;
+    }
   }
 }
 </style>

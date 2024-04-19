@@ -4,7 +4,7 @@
   }>()
   const demoComponent = resolveComponent(props.componentName)
 
-  const MAX_CODE_BLOCK_HEIGHT = 500
+  const MAX_CODE_BLOCK_HEIGHT = 520
 
   const codeBolckRef = ref<HTMLDivElement | null>()
 
@@ -33,7 +33,11 @@
         :class="{ 'bg-gradient-to-t from-gray-100 to-transparent': isCollapsed }"
         flex="~ items-end justify-center"
       >
-        <button class="bg-gray-200 hover-bg-gray-300 mb-3 px-2 py-1.5 rounded-md text-sm transition" @click="isCollapsed = !isCollapsed">
+        <button
+          class="bg-gray-200 hover-bg-gray-300 px-2 py-1.5 rounded-md text-sm transition"
+          :class="[isCollapsed ? 'mb-3' : 'mb-6']"
+          @click="isCollapsed = !isCollapsed"
+        >
           {{ isCollapsed ? 'Show more' : 'Show less' }}
         </button>
       </div>

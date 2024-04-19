@@ -17,7 +17,9 @@ const menu = {
   'Customization': 'Customization',
   'Select date': 'Select date',
   'Select month': 'Select month',
-  'Custom Style': 'Custom Style'
+  'Custom Style': 'Custom Style',
+  'Localization': 'Localization'
+
 }
 
 export default {

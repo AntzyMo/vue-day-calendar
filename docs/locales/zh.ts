@@ -18,7 +18,9 @@ const menu = {
   'Customization': '自定义日历',
   'Select date': '选择日期',
   'Select month': '选择月份',
-  'Custom Style': '自定义样式'
+  'Custom Style': '自定义样式',
+  'Localization': '配置国际化'
+
 }
 
 export default {
