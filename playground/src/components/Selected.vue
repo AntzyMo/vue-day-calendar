@@ -10,6 +10,7 @@
   })
   function handleSelect(item: DayType) {
     console.log('item', item)
+    selected.value = item.date
   }
 </script>
 

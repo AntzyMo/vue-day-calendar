@@ -1,20 +1,20 @@
 <script setup lang="ts">
+  import dayjs from 'dayjs'
   import { computed, ref } from 'vue'
 
   import VueDayCalendar from 'vue-day-calendar'
 
   const selected = ref()
-  const vueDayCalendarRef = ref<InstanceType< typeof VueDayCalendar>>()
   const selectedText = computed(() => {
     return selected.value ? `已选择：${selected.value}` : '请选择一天'
   })
   function goToToday() {
-    vueDayCalendarRef.value?.goToToday()
+    selected.value = dayjs().format('YYYY-MM-DD')
   }
 </script>
 
 <template>
-  <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
+  <VueDayCalendar v-model="selected">
     <template #cell="{ item }">
       <div class="relative">
         <span>{{ item.value }}</span>

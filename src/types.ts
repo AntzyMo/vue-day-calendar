@@ -1,4 +1,3 @@
-import type { Dayjs } from 'dayjs'
 
 export interface classesTypes {
   root: string
@@ -22,7 +21,6 @@ export interface EventChange {
   value: string
 }
 
-export type VDateType = Date | Dayjs | string
 export interface VueDayCalendarProps {
   /**
    * YearAndMonth format.
@@ -49,12 +47,12 @@ export interface VueDayCalendarProps {
   /**
    * Maximum display date.
    */
-  maxDate?: VDateType
+  maxDate?: string
 
   /**
    * Minimum display date.
    */
-  minDate?: VDateType
+  minDate?: string
 
   /**
    * Disable navigation buttons

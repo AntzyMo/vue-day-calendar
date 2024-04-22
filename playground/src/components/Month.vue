@@ -1,11 +1,10 @@
 <script setup lang="ts">
   import { ref } from 'vue'
+  import dayjs from 'dayjs'
   import type { EventChange } from 'vue-day-calendar'
 
   import 'vue-day-calendar/style.css'
   import VueDayCalendar from 'vue-day-calendar'
-
-  const vueDayCalendarRef = ref<InstanceType<typeof VueDayCalendar>>()
 
   const month = ref('2023-04')
 
@@ -16,8 +15,9 @@
   function monthChange(value: EventChange) {
     console.log('value', value)
   }
+
   function goToToday() {
-    vueDayCalendarRef.value!.goToToday()
+    month.value = dayjs().format('YYYY-MM')
   }
 </script>
 
@@ -33,7 +33,6 @@
   </button>
 
   <VueDayCalendar
-    ref="vueDayCalendarRef"
     v-model:month="month"
     @change="monthChange"
   >

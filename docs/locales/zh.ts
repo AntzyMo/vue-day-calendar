@@ -16,8 +16,8 @@ const menu = {
   'Get Started': '快速上手',
   'Basics': '基本属性',
   'Customization': '自定义日历',
-  'Select date': '选择日期',
-  'Select month': '选择月份',
+  'Select Date': '选择日期',
+  'Select Month': '选择月份',
   'Custom Style': '自定义样式',
   'Localization': '配置国际化'
 

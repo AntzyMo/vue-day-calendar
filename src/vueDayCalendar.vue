@@ -6,7 +6,6 @@
     EventChange,
     EventSelect,
     MonthsTrigger,
-    VDateType,
     VueDayCalendarProps
   } from './types'
 
@@ -38,8 +37,7 @@
   }>()
 
   defineExpose({
-    monthsTrigger,
-    goToToday
+    monthsTrigger
   })
 
   // classes computed
@@ -58,21 +56,20 @@
   const todayClass = computed(() => props.classes?.today || 'today')
 
   // v-model selected day
-  const modelValue = defineModel<string | Date>()
+  const modelValue = defineModel<string>()
   // v-model month
-  const modelMonth = defineModel<VDateType>('month')
+  const modelMonth = defineModel<string>('month')
 
-  // 默认的日期
-  const defaultDay = computed(() => {
+  // 创建日期
+  function createCalendarDate() {
     const dayjsInstance = dayjs(modelMonth.value || new Date())
     return props.locale ? dayjsInstance.locale(props.locale) : dayjsInstance
-  })
+  }
 
-  // 需要改变的日期
-  const dayjsRef = shallowRef(defaultDay.value)
+  const dayjsRef = shallowRef(createCalendarDate())
 
-  watch(defaultDay, val => {
-    dayjsRef.value = val
+  watch(modelMonth, () => {
+    dayjsRef.value = createCalendarDate()
   })
 
   const year = computed(() => dayjsRef.value.format(props.yearAndMonthFormat || YEAR_MONTH_FORMAT))
@@ -118,11 +115,11 @@
     return weekDays
   })
 
-  function isAfterDate(maxDate?: VDateType) {
+  function isAfterDate(maxDate?: string) {
     return maxDate && dayjsRef.value.isAfter(dayjs(maxDate))
   }
 
-  function isBeforeDate(minDate?: VDateType) {
+  function isBeforeDate(minDate?: string) {
     return minDate && dayjsRef.value.isBefore(dayjs(minDate))
   }
 
@@ -152,11 +149,6 @@
     })
 
     modelValue.value = item.date
-  }
-
-  function goToToday() {
-    dayjsRef.value = dayjs()
-    modelMonth.value = dayjsRef.value.format('YYYY-MM')
   }
 </script>
 
@@ -226,7 +218,7 @@
                 dayClass,
                 { hoverNotStyle: it.type !== 'current' },
                 it.type !== 'current' ? day_outsideClass : '',
-                isToday(it.date, defaultDay) ? todayClass : '',
+                isToday(it.date) ? todayClass : '',
                 isSameDate(it.date, modelValue) ? day_selectedClass : '',
               ]"
               @click="onSelect(it)"

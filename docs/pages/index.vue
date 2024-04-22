@@ -7,10 +7,8 @@
   const yearAndMonthDate = dayjs().format('YYYY-MM')
   const selected = ref(`${yearAndMonthDate}-24`)
 
-  const vueDayCalendarRef = ref<InstanceType<typeof VueDayCalendar>>()
-
   function goToToday() {
-    vueDayCalendarRef.value?.goToToday()
+    selected.value = dayjs().format('YYYY-MM-DD')
   }
 </script>
 
@@ -33,7 +31,7 @@
           {{ $t('index.button') }}
         </NuxtLink>
       </div>
-      <VueDayCalendar ref="vueDayCalendarRef" v-model="selected">
+      <VueDayCalendar v-model="selected">
         <template #footer>
           <div class="w-230px">
             <p class="my-2">

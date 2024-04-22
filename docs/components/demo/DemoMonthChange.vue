@@ -14,8 +14,9 @@
   function monthChange(value: EventChange) {
     console.log('month change value', value)
   }
+
   function goToToday() {
-    month.value = dayjs().format('YYYY-MM')
+    month.value = dayjs().format('YYYY-MM-DD')
   }
 </script>
 

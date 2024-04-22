@@ -15,8 +15,8 @@ const menu = {
   'Get Started': 'Get Started',
   'Basics': 'Basics',
   'Customization': 'Customization',
-  'Select date': 'Select date',
-  'Select month': 'Select month',
+  'Select Date': 'Select Date',
+  'Select Month': 'Select Month',
   'Custom Style': 'Custom Style',
   'Localization': 'Localization'
 
