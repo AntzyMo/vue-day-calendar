@@ -4,7 +4,7 @@ const index = {
   title2: '显示日期的组件',
   title3: '以日历的方式去呈现',
   button: '快速开始',
-  vueDayCalendarFooterText: '已选择：',
+  vueDayCalendarFooterText: '已选择',
   vueDayCalendarFooterButton: 'Go to Today',
   pickNotText: '请选择一天',
   currentMonth: '当前月份为'

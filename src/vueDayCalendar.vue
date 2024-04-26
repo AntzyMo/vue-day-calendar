@@ -298,10 +298,9 @@
           </td>
         </tr>
       </tbody>
-      <tfoot>
-        <slot name="footer"/>
-      </tfoot>
     </table>
+
+    <slot name="footer"/>
   </div>
 </template>
 
