@@ -20,6 +20,7 @@ English | <a href="README-CN.md">中文</a>
 ![screenshot](./assets/screenshot.png)
 
 ## ✨ Main features
+-  Select days, ranges or whatever
 -  A calendar component focused on date selection
 -  Using [dayjs](https://dayjs.gitee.io/en) as the date library
 -  Localizable into any language

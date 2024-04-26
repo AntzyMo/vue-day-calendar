@@ -21,6 +21,7 @@ vue-day-calendar
 ![screenshot](./assets/screenshot.png)
 
 ## ✨ 功能特点
+-  选择日期、范围或其他
 -  以选择日期为主要的日历组件
 -  使用 [dayjs](https://dayjs.gitee.io/zh-CN) 作为日期库
 -  国际化多语言
