@@ -11,7 +11,7 @@ export function toDayjs(date: DateOption) {
   return date
 }
 
-export function isSameDate(source: DateOption, target?: DateOption) {
+export function isSameDate(source: string, target: string) {
   if (!target) return false
   return dayjs(target).isSame(source, 'day')
 }
@@ -30,4 +30,9 @@ export function createDay(type: 'prev' | 'current' | 'next', dateRaw: dayjs.Dayj
 
 export function createNextDay(dateRaw: dayjs.Dayjs, day: number): DayType {
   return createDay('next', dateRaw.endOf('month').add(day + 1, 'day'))
+}
+
+export function toArray(value: string | string[]) {
+  if (Array.isArray(value)) return value
+  return [value]
 }

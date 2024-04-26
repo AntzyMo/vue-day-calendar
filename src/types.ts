@@ -1,4 +1,3 @@
-
 export interface classesTypes {
   root: string
   head: string
@@ -13,9 +12,14 @@ export interface classesTypes {
   day_selected: string
   day_outside: string
   today: string
+  mode_range: string
+  first_mode_range: string
+  last_mode_range: string
 }
 
-export type EventSelect = Pick<DayType, 'date' | 'type'>
+export type EventSelect = Record<'value', string | string[] | null>
+
+export type CalendarMode = 'single' | 'multiple' | 'range'
 export interface EventChange {
   type: 'prev' | 'next'
   value: string
@@ -63,6 +67,8 @@ export interface VueDayCalendarProps {
    * Fixed number of weeks.
    */
   fixedWeeks?: boolean | number
+
+  mode?: CalendarMode
 }
 
 export interface DayType {

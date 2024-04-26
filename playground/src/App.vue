@@ -5,8 +5,10 @@
   import Selected from './components/Selected.vue'
   import Classes from './components/Classes/index.vue'
   import FixedWeeks from './components/FixedWeeks.vue'
+  import ModelRange from './components/ModelRange.vue'
   import SelectedDays from './components/SelectedDays.vue'
   import MaxAndMinDate from './components/MaxAndMinDate.vue'
+  import ModelMultiple from './components/ModelMultiple.vue'
   import CustomSelected from './components/CustomSelected.vue'
   import ShowOutsideDays from './components/ShowOutsideDays.vue'
 </script>
@@ -61,6 +63,16 @@
     <div class="w-[250px]">
       <h2>SelectedDays</h2>
       <SelectedDays/>
+    </div>
+
+    <div class="mb-100px w-[250px]">
+      <h2>ModelMultiple</h2>
+      <ModelMultiple/>
+    </div>
+
+    <div class="mb-100px w-[250px]">
+      <h2>ModelRange</h2>
+      <ModelRange/>
     </div>
   </div>
 </template>

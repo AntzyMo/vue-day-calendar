@@ -2,6 +2,7 @@
   import dayjs from 'dayjs'
   import { computed, shallowRef, toValue, watch } from 'vue'
   import type {
+    CalendarMode,
     DayType,
     EventChange,
     EventSelect,
@@ -12,11 +13,12 @@
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
 
-  import { createDay, createNextDay, isSameDate, isToday } from './helper'
+  import { createDay, createNextDay, isSameDate, isToday, toArray } from './helper'
 
   const props = withDefaults(defineProps<VueDayCalendarProps>(), {
     showOutsideDays: false,
-    disableNavigation: false
+    disableNavigation: false,
+    mode: 'single'
   })
 
   const emit = defineEmits<{
@@ -54,9 +56,13 @@
   const day_selectedClass = computed(() => props.classes?.day_selected || 'selectedDay')
   const day_outsideClass = computed(() => props.classes?.day_outside || 'day_outside')
   const todayClass = computed(() => props.classes?.today || 'today')
+  // props mode range class
+  const modeRangeClass = computed(() => props.classes?.mode_range || 'mode_range')
+  const firstModeRangeClass = computed(() => props.classes?.first_mode_range || 'first_mode_range')
+  const lastModeRangeClass = computed(() => props.classes?.last_mode_range || 'last_mode_range')
 
   // v-model selected day
-  const modelValue = defineModel<string>()
+  const modelValue = defineModel<string | string[] | null>({ default: null })
   // v-model month
   const modelMonth = defineModel<string>('month')
 
@@ -139,16 +145,76 @@
     })
   }
 
+  let selectedDays: string[] = [...toArray(modelValue.value || [])]
+
+  function isSelectedDay(day: string) {
+    const toSelectedArr = modelValue.value ? toArray(modelValue.value) : []
+    if (props.mode === 'range') {
+      const [starSelectedDay, endSelectedDay] = selectedDays
+      if (starSelectedDay && endSelectedDay) {
+        return isSameDate(day, starSelectedDay) || isSameDate(day, endSelectedDay) || (dayjs(day).isAfter(dayjs(starSelectedDay)) && dayjs(day).isBefore(dayjs(endSelectedDay)))
+      }
+    }
+    return toSelectedArr.some(item => isSameDate(day, item))
+  }
+
   function onSelect(item: DayType) {
     const { date, type } = item
     if (type !== 'current') return
 
+    const modeValue = handleMode(props.mode, date)
+    modelValue.value = modeValue
     emit('select', {
-      date,
-      type
+      value: modeValue
     })
+  }
 
-    modelValue.value = item.date
+  // handle props mode
+  let sameDateFlag = 0
+  function handleMode(mode: CalendarMode, date: string) {
+    let modeValue: string | string[] | null = []
+    if (mode === 'multiple') {
+      const selectedIdx = selectedDays.findIndex(item => item === date)
+      if (selectedIdx === -1) {
+        selectedDays.push(date)
+      } else {
+        selectedDays.splice(selectedIdx, 1)
+      }
+      modeValue = selectedDays.toSorted()
+    } else if (mode === 'range') {
+      if (!selectedDays.length) {
+        selectedDays.push(date)
+      } else {
+        if (selectedDays.includes(date)) {
+          sameDateFlag++
+          if (sameDateFlag > 1) {
+            selectedDays = []
+            sameDateFlag = 0
+          } else {
+            selectedDays = [date]
+          }
+        } else {
+          if (dayjs(date).isBefore(dayjs(selectedDays[0]))) {
+            if (selectedDays.length > 1) {
+              selectedDays[0] = date
+            } else {
+              selectedDays = [date, ...selectedDays]
+            }
+          } else {
+            selectedDays[1] = date
+          }
+        }
+      }
+      modeValue = [...selectedDays]
+    } else {
+      if (selectedDays.includes(date)) {
+        selectedDays = []
+      } else {
+        selectedDays = [date]
+      }
+      modeValue = selectedDays[0] || null
+    }
+    return modeValue
   }
 </script>
 
@@ -208,18 +274,20 @@
             class="body_col"
             :class="[
               { hoverNotStyle: !it.value },
+              mode === 'range' && modelValue?.length === 2 && isSelectedDay(it.date) ? modeRangeClass : '',
+              mode === 'range' && modelValue?.length === 2 && it.date === modelValue?.[0] ? firstModeRangeClass : '',
+              mode === 'range' && modelValue?.length === 2 && it.date === modelValue?.[1] ? lastModeRangeClass : '',
               body_colClass,
             ]"
           >
             <div
-              :aria-selected="isSameDate(it.date, modelValue) || undefined"
               class="day"
               :class="[
                 dayClass,
                 { hoverNotStyle: it.type !== 'current' },
                 it.type !== 'current' ? day_outsideClass : '',
                 isToday(it.date) ? todayClass : '',
-                isSameDate(it.date, modelValue) ? day_selectedClass : '',
+                isSelectedDay(it.date) ? day_selectedClass : '',
               ]"
               @click="onSelect(it)"
             >
@@ -238,6 +306,8 @@
 </template>
 
 <style lang="scss" scoped>
+$selected-bg: #e5e5e5;
+
 .v-day-calendar {
   cursor: default;
   user-select: none;
@@ -323,7 +393,7 @@
   }
 
   .selectedDay {
-    background: #e5e5e5 !important;
+    background: $selected-bg!important;
   }
 
   .hoverNotStyle {
@@ -338,6 +408,19 @@
     &:hover {
       background: none;
     }
+  }
+
+  .mode_range {
+    background: $selected-bg;
+  }
+
+  .first_mode_range{
+    border-top-left-radius: 5px;
+  }
+
+  .last_mode_range{
+    border-bottom-right-radius: 5px;
+
   }
 }
 </style>
