@@ -1,5 +1,7 @@
 <script setup lang="ts">
   import dayjs from 'dayjs'
+  import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+  import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
   import { computed, shallowRef, toValue, watch } from 'vue'
   import type {
     CalendarMode,
@@ -13,7 +15,13 @@
   import IconLeftArrow from '~icons/mingcute/left-fill'
   import IconRightArrow from '~icons/mingcute/right-fill'
 
-  import { createDay, createNextDay, isSameDate, isToday, toArray } from './helper'
+  import {
+    createDay,
+    createNextDay,
+    isSameDate,
+    isToday,
+    toArray
+  } from './helper'
 
   const props = withDefaults(defineProps<VueDayCalendarProps>(), {
     showOutsideDays: false,
@@ -68,6 +76,8 @@
 
   // 创建日期
   function createCalendarDate() {
+    dayjs.extend(isSameOrAfter)
+    dayjs.extend(isSameOrBefore)
     const dayjsInstance = dayjs(modelMonth.value || new Date())
     return props.locale ? dayjsInstance.locale(props.locale) : dayjsInstance
   }
@@ -121,17 +131,17 @@
     return weekDays
   })
 
-  function isAfterDate(maxDate?: string) {
-    return maxDate && dayjsRef.value.isAfter(dayjs(maxDate))
-  }
+  const isAfterMonth = computed(() => {
+    return props.maxDate && dayjsRef.value.isSameOrAfter(dayjs(props.maxDate), 'month')
+  })
 
-  function isBeforeDate(minDate?: string) {
-    return minDate && dayjsRef.value.isBefore(dayjs(minDate))
-  }
+  const isBeforeMonth = computed(() => {
+    return props.minDate && dayjsRef.value.isSameOrBefore(dayjs(props.minDate), 'month')
+  })
 
   function monthsTrigger(type: 'prev' | 'next') {
-    if (type === 'next' && isAfterDate(props.maxDate)) return
-    if (type === 'prev' && isBeforeDate(props.minDate)) return
+    if (type === 'next' && isAfterMonth.value) return
+    if (type === 'prev' && isBeforeMonth.value) return
 
     const dayjs = toValue(dayjsRef)
 
@@ -161,6 +171,10 @@
   function onSelect(item: DayType) {
     const { date, type } = item
     if (type !== 'current') return
+
+    const isAfter = props.maxDate && dayjs(date).isAfter(dayjs(props.maxDate, 'day'))
+    const isBefore = props.minDate && dayjs(date).isBefore(dayjs(props.minDate, 'day'))
+    if (isAfter || isBefore) return
 
     const modeValue = handleMode(props.mode, date)
     modelValue.value = modeValue
@@ -229,7 +243,7 @@
           <IconLeftArrow
             class="action_button"
             :class="[
-              { exceedDate: isBeforeDate(props.minDate) },
+              { exceedDate: isBeforeMonth },
               head_actionClass,
             ]"
             @click="monthsTrigger('prev')"
@@ -237,7 +251,7 @@
           <IconRightArrow
             class="action_button"
             :class="[
-              { exceedDate: isAfterDate(props.maxDate) },
+              { exceedDate: isAfterMonth },
               head_actionClass,
             ]"
             @click="monthsTrigger('next')"
