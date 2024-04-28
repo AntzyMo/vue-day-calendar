@@ -168,13 +168,13 @@
     return toSelectedArr.some(item => isSameDate(day, item))
   }
 
+  const isAfterDay = (date: string) => props.maxDate && dayjs(date).isAfter(dayjs(props.maxDate, 'day'))
+  const isBeforeDay = (date: string) => props.minDate && dayjs(date).isBefore(dayjs(props.minDate, 'day'))
   function onSelect(item: DayType) {
     const { date, type } = item
     if (type !== 'current') return
 
-    const isAfter = props.maxDate && dayjs(date).isAfter(dayjs(props.maxDate, 'day'))
-    const isBefore = props.minDate && dayjs(date).isBefore(dayjs(props.minDate, 'day'))
-    if (isAfter || isBefore) return
+    if (isAfterDay(date) || isBeforeDay(date)) return
 
     const modeValue = handleMode(props.mode, date)
     modelValue.value = modeValue
@@ -299,6 +299,7 @@
               :class="[
                 dayClass,
                 { hoverNotStyle: it.type !== 'current' },
+                { disabled: isAfterDay(it.date) || isBeforeDay(it.date) },
                 it.type !== 'current' ? day_outsideClass : '',
                 isToday(it.date) ? todayClass : '',
                 isSelectedDay(it.date) ? day_selectedClass : '',
@@ -433,7 +434,11 @@ $selected-bg: #e5e5e5;
 
   .last_mode_range{
     border-bottom-right-radius: 5px;
+  }
 
+  .disabled{
+    cursor: not-allowed;
+    opacity: 50%;
   }
 }
 </style>
