@@ -1,14 +1,16 @@
 <script setup lang="ts">
   import dayjs from 'dayjs'
+  import { ref } from 'vue'
 
   import 'vue-day-calendar/style.css'
   import VueDayCalendar from 'vue-day-calendar'
 
   const yearAndMonthDate = dayjs().format('YYYY-MM')
   const selected = ref(`${yearAndMonthDate}-24`)
-
+  const month = ref('')
   function goToToday() {
-    selected.value = dayjs().format('YYYY-MM-DD')
+    selected.value = `${dayjs().format('YYYY-MM')}-24`
+    month.value = dayjs().format('YYYY-MM')
   }
 </script>
 
@@ -31,7 +33,7 @@
           {{ $t('index.button') }}
         </NuxtLink>
       </div>
-      <VueDayCalendar v-model="selected">
+      <VueDayCalendar v-model="selected" v-model:month="month">
         <template #footer>
           <div class="w-230px">
             <p class="my-2">

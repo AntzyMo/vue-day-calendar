@@ -16,7 +16,7 @@
   }
 
   function goToToday() {
-    month.value = dayjs().format('YYYY-MM-DD')
+    month.value = dayjs().format('YYYY-MM')
   }
 </script>
 

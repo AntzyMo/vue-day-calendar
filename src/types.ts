@@ -18,12 +18,8 @@ export interface classesTypes {
 }
 
 export type EventSelect = Record<'value', string | string[] | null>
-
+export type EventChange = Record<'value', string>
 export type CalendarMode = 'single' | 'multiple' | 'range'
-export interface EventChange {
-  type: 'prev' | 'next'
-  value: string
-}
 
 export interface VueDayCalendarProps {
   /**

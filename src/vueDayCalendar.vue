@@ -69,9 +69,9 @@
   const firstModeRangeClass = computed(() => props.classes?.first_mode_range || 'first_mode_range')
   const lastModeRangeClass = computed(() => props.classes?.last_mode_range || 'last_mode_range')
 
-  // v-model selected day
+  // v-model selected day YYYY-MM-DD
   const modelValue = defineModel<string | string[] | null>({ default: null })
-  // v-model month
+  // v-model month YYYY-MM
   const modelMonth = defineModel<string>('month')
 
   // 创建日期
@@ -150,7 +150,6 @@
     modelMonth.value = dayjsRef.value.format('YYYY-MM')
 
     emit('change', {
-      type,
       value: dayjsRef.value.format('YYYY-MM')
     })
   }
