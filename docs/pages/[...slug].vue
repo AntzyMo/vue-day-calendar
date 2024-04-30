@@ -40,6 +40,10 @@
     @apply text-lg font-500 mb-3 mt-5;
   }
 
+  h3{
+    @apply text-base font-500 mb-3 mt-5;
+  }
+
   .preClass{
     @apply w-650px!;
   }
