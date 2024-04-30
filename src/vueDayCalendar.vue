@@ -202,10 +202,10 @@
           sameDateFlag++
           if (sameDateFlag > 1) {
             selectedDays = []
-            sameDateFlag = 0
           } else {
-            selectedDays = [date]
+            selectedDays = selectedDays.length === 1 ? [] : [date]
           }
+          sameDateFlag = 0
         } else {
           if (dayjs(date).isBefore(dayjs(selectedDays[0]))) {
             if (selectedDays.length > 1) {
