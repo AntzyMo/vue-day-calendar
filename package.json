@@ -47,6 +47,7 @@
     "bumpp": "^9.4.0",
     "eslint": "^8.57.0",
     "jsdom": "^24.0.0",
+    "sass": "^1.77.1",
     "typescript": "^5.2.2",
     "unplugin-icons": "^0.18.5",
     "vite": "^5.2.0",
