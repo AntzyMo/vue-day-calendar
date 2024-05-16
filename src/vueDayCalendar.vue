@@ -324,6 +324,7 @@ $selected-bg: #e5e5e5;
 .v-day-calendar {
   cursor: default;
   user-select: none;
+  width: 224px;
 
   .head {
     display: flex;

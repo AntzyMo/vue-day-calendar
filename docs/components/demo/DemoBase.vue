@@ -4,5 +4,5 @@
 </script>
 
 <template>
-  <VueDayCalendar class="w-230px"/>
+  <VueDayCalendar/>
 </template>

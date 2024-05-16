@@ -35,7 +35,7 @@
       </div>
       <VueDayCalendar v-model="selected" v-model:month="month">
         <template #footer>
-          <div class="w-230px">
+          <div>
             <p class="my-2">
               {{ $t('index.vueDayCalendarFooterText') }} {{ selected }}
             </p>
