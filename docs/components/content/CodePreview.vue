@@ -6,13 +6,14 @@
 
   const MAX_CODE_BLOCK_HEIGHT = 520
 
-  const codeBolckRef = ref<HTMLDivElement | null>()
+  const codeBlockRef = ref<HTMLDivElement | null>()
 
   const isCollapsedMask = ref(false)
   const isCollapsed = ref(true)
 
-  onMounted(() => {
-    const codeBlock = toValue(codeBolckRef)
+  onMounted(async () => {
+    await nextTick()
+    const codeBlock = toValue(codeBlockRef)
     if (codeBlock!.clientHeight > MAX_CODE_BLOCK_HEIGHT) {
       isCollapsedMask.value = true
     }
@@ -22,9 +23,9 @@
 <template>
   <div class="pr-2" flex="~  justify-between">
     <div
-      ref="codeBolckRef"
+      ref="codeBlockRef"
       class="mb-4  relative  rounded-md"
-      :style="[isCollapsedMask && isCollapsed ? { height: `${MAX_CODE_BLOCK_HEIGHT}px`, overflow: 'hidden' } : { overflow: 'auto' }]"
+      :style="[isCollapsedMask && isCollapsed ? { height: `${MAX_CODE_BLOCK_HEIGHT}px`, overflow: 'hidden' } : { height: 'auto', overflow: 'auto' }]"
     >
       <ContentSlot/>
       <div

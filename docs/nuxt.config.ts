@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: false,
   devtools: { enabled: true },
   modules: [
     '@unocss/nuxt',
@@ -9,7 +8,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/i18n'
   ],
-  css: ['@unocss/reset/tailwind.css'],
+  css: ['@unocss/reset/tailwind.css', 'vue-day-calendar/style.css'],
   content: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],

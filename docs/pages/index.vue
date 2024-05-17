@@ -2,7 +2,7 @@
   import dayjs from 'dayjs'
   import { ref } from 'vue'
 
-  import 'vue-day-calendar/style.css'
+   
   import VueDayCalendar from 'vue-day-calendar'
 
   const yearAndMonthDate = dayjs().format('YYYY-MM')

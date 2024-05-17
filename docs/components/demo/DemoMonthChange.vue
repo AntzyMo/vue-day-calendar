@@ -3,7 +3,7 @@
   import dayjs from 'dayjs'
   import type { EventChange } from 'vue-day-calendar'
 
-  import 'vue-day-calendar/style.css'
+   
   import VueDayCalendar from 'vue-day-calendar'
 
   const month = ref('2023-04')
