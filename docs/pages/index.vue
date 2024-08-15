@@ -2,14 +2,13 @@
   import dayjs from 'dayjs'
   import { ref } from 'vue'
 
-   
   import VueDayCalendar from 'vue-day-calendar'
 
   const yearAndMonthDate = dayjs().format('YYYY-MM')
   const selected = ref(`${yearAndMonthDate}-24`)
   const month = ref('')
   function goToToday() {
-    selected.value = `${dayjs().format('YYYY-MM')}-24`
+    selected.value = dayjs().format('YYYY-MM-DD')
     month.value = dayjs().format('YYYY-MM')
   }
 </script>
