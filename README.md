@@ -1,3 +1,5 @@
+
+
 <p align=center>
 <a href="https://github.com/AntzyMo/vue-day-calendar"><img src="./assets/logo.svg" width="140"/></a>
 </p>
@@ -14,7 +16,7 @@ English | <a href="README-CN.md">中文</a>
 <a href="https://daycalendar.antzy.me">📚️ Documentation</a>
 </p>
 
-`day-calendar` is a `Vue` date picker component that presents dates in a calendar format. It features a clean appearance and supports customizable styling with `tailwindcss` and `unocss`.
+`vue-day-calendar` is a `Vue` date picker component that presents dates in a calendar format. It features a clean appearance and supports customizable styling with `tailwindcss` and `unocss`.
 
 
 ![screenshot](./assets/screenshot.png)
@@ -50,6 +52,3 @@ If you encounter any problems during use, feel free to submit an [issue](https:/
 
 ## License
 [MIT](./LICENSE) License &copy; 2024-PRESENT [AntzyMo](https://github.com/AntzyMo)
-
-
-
